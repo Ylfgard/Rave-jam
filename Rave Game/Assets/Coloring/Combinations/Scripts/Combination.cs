@@ -8,9 +8,4 @@ public class Combination : ScriptableObject
     [SerializeField] private List<Paint> _paints;
 
     public List<Paint> Paints => _paints;
-
-    public Combination(List<Paint> paints)
-    {
-        _paints = paints;
-    }
 }
