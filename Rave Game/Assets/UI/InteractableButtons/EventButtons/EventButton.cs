@@ -1,6 +1,6 @@
-using System;
+using UnityEngine.Events;
 public class EventButton : InteractableButton
 {
-    public event Action Clicked;
+    public UnityEvent Clicked;
     protected sealed override void Interact() => Clicked?.Invoke();
 }

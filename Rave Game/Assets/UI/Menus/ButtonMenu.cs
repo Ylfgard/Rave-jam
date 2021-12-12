@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Menu : MonoBehaviour, IMenu
+public class ButtonMenu : MonoBehaviour, IMenu
 {
     public void Hide()
     {
