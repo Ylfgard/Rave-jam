@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimalCombination : MonoBehaviour
+[CreateAssetMenu(fileName = "AnimalCombination", menuName = "Animal/Combination", order = 0)]
+public class AnimalCombination : ScriptableObject
 {
-    [SerializeField] private Palette _palette;
-    [SerializeField] private GameObject _animal;
+    [SerializeField] private GameObject _animalPrefab;
     [SerializeField] private List<Combination> _combinations;
-    private List<AnimalBehavior> _animalsBehavior = new List<AnimalBehavior>();
+    private List<Animal> _animals = new List<Animal>();
 
     public bool CheckCombination(List<Paint> paints)
     {
@@ -17,25 +17,25 @@ public class AnimalCombination : MonoBehaviour
         return false;
     }
 
-    public void SpawnAnimal()
+    public void SpawnAnimal(Palette palette)
     {
-        if(_animalsBehavior.Count == 0)
+        if(_animals.Count == 0)
             ShowAnimal();
-        AnimalBehavior animalBehavior = Instantiate(_animal, Vector3.zero, Quaternion.identity).GetComponent<AnimalBehavior>();
-        animalBehavior.Init(_palette);
-        _animalsBehavior.Add(animalBehavior);
+        Animal animal = Instantiate(_animalPrefab, Vector3.zero, Quaternion.identity).GetComponent<Animal>();
+        animal.Init(palette);
+        _animals.Add(animal);
     }
 
     public void DespawnAnimal()
     {
-        if(_animalsBehavior.Count == 0)
+        if(_animals.Count == 0)
         {
             return;
         }
         else
         {
-            _animalsBehavior[0].Despawn();
-            if(_animalsBehavior.Count == 0)
+            _animals[0].Despawn();
+            if(_animals.Count == 0)
                 HideAnimal();
         }
     }
