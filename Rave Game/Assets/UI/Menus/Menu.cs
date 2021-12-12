@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class MerchantStoreMenu : MonoBehaviour, IMenu
+public class Menu : MonoBehaviour
 {
     public void Hide()
     {
