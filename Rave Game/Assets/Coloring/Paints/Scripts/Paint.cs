@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 [CreateAssetMenu(fileName = "Paint", menuName = "Coloring/Paint", order = 4)]
 public class Paint : ScriptableObject
 {
