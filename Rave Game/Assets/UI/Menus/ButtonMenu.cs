@@ -1,12 +1,3 @@
-using UnityEngine;
-public class ButtonMenu : MonoBehaviour, IMenu
+public class ButtonMenu : Menu
 {
-    public void Hide()
-    {
-        gameObject.SetActive(false);
-    }
-    public void Show()
-    {
-        gameObject.SetActive(true);
-    }
 }

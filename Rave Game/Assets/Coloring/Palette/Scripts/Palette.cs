@@ -6,6 +6,7 @@ using System;
 public class Palette : MonoBehaviour
 {
     [SerializeField] private List<PaintCell> _paintCells;
+    public IReadOnlyCollection<PaintCell> PaintCells => _paintCells;
 
     public void UnblockPaint(string paintName)
     {
