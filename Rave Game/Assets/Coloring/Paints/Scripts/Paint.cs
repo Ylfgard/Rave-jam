@@ -15,3 +15,11 @@ public class Paint : ScriptableObject
 
     public int Price => _price; 
 }
+
+public class PaintNameComparer : IComparer<Paint>
+{
+    public int Compare(Paint a, Paint b)
+    {
+        return a.Name.CompareTo(b.Name);
+    }
+}

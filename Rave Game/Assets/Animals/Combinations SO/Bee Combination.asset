@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ceb864c6f21b146a5d676b3a96b692, type: 3}
   m_Name: Bee Combination
   m_EditorClassIdentifier: 
-  _animalPrefab: {fileID: 6361173195296504850, guid: 842e30ce44993614ba881617f21fc983, type: 3}
   _combinations:
-  - {fileID: 11400000, guid: 6e0474c3b619f4e419f7579b75d016f0, type: 2}
   - {fileID: 11400000, guid: 497c3b94cc0892b45acffc8b3efa766a, type: 2}
+  - {fileID: 11400000, guid: 6e0474c3b619f4e419f7579b75d016f0, type: 2}

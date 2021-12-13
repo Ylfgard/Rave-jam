@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CombinationChecker : MonoBehaviour
 {
-    [SerializeField] private Palette _palette;
-    [SerializeField] private List<AnimalCombination> _animalCombinations;
+    [SerializeField] private AnimalSpawner _animalSpawner;
+    [SerializeField] private List<AnimalData> _animalsData;
+    [SerializeField] private List<Paint> _paints;
 
-    private delegate void ChoosedAction(AnimalCombination animalCombination);
+    private void Start() 
+    {
+        AddCombination(_paints);
+    }
+
+    private delegate void ChoosedAction(AnimalData animalCombination);
 
     public void AddCombination(List<Paint> paints)
     {
@@ -19,20 +26,48 @@ public class CombinationChecker : MonoBehaviour
         CheckCombination(paints, Despawn);
     }
 
-    private void Spawn(AnimalCombination animalCombination)
+    private void Spawn(AnimalData animalData)
     {
-        animalCombination.SpawnAnimal(_palette);
+        _animalSpawner.SpawnAnimal(animalData);
     }
 
-    private void Despawn(AnimalCombination animalCombination)
+    private void Despawn(AnimalData animalData)
     {
-        animalCombination.DespawnAnimal();
+        _animalSpawner.DespawnAnimal(animalData);
     }
 
     private void CheckCombination(List<Paint> paints, ChoosedAction action)
     {
-        foreach(AnimalCombination animalCombination in _animalCombinations)
-            if(animalCombination.CheckCombination(paints))
-                action?.Invoke(animalCombination);
+        foreach(AnimalData animalData in _animalsData)
+            if(animalData.AnimalCombination.CheckCombination(paints))
+                action?.Invoke(animalData);
+    }
+}
+
+[Serializable]
+public class AnimalData
+{
+    [SerializeField] private AnimalCombination _animalCombination;
+    [SerializeField] private GameObject _animalPrefab;
+    [SerializeField] private Animator _animator;
+    private List<Animal> _existingAnimals = new List<Animal>();
+
+    public AnimalCombination AnimalCombination => _animalCombination;
+
+    public GameObject AnimalPrefab => _animalPrefab;
+
+    public Animator Animator => _animator;
+
+    public List<Animal> ExistingAnimals => _existingAnimals;
+
+    public void AddAnimal(Animal animal) 
+    {
+        _existingAnimals.Add(animal);
+    }
+
+    public void RemoveAnimal(Animal animal)
+    {
+        _existingAnimals.Remove(animal);
+        animal.Despawn();
     }
 }
