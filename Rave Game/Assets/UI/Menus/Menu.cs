@@ -1,12 +1,34 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 public class Menu : MonoBehaviour
 {
-    public void Hide()
+    public event Action Shown;
+    public event Action Hid;
+    [SerializeField]
+    private Button _showButton;
+    [SerializeField]
+    private Button _hideButton;
+    [SerializeField]
+    private Panel _menuPanel;
+    private void OnEnable()
     {
-        gameObject.SetActive(false);
+        _showButton.onClick.AddListener(Show);
+        _hideButton.onClick.AddListener(Hide);
     }
-    public void Show()
+    private void OnDisable()
     {
-        gameObject.SetActive(true);
+        _showButton.onClick.RemoveListener(Show);
+        _hideButton.onClick.RemoveListener(Hide);
+    }
+    private void Show()
+    {
+        _menuPanel.Show();
+        Shown?.Invoke();
+    }
+    private void Hide()
+    {
+        _menuPanel.Hide();
+        Hid?.Invoke();
     }
 }
