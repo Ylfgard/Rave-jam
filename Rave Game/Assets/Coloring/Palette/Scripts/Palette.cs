@@ -20,19 +20,13 @@ public class Palette : MonoBehaviour
             if(paintCell.Available && paintCell.Paint.Name == paintName)
             {
                 if(paintCell.ChangeCount(count))
-                {
-
                     return true;
-                }
                 else
-                {
                     return false;
-                }
             }
         return false;
     }
 }
-
 [Serializable]
 public class PaintCell
 {
