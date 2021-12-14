@@ -233,8 +233,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 80, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &64366913
@@ -1451,7 +1451,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 977660155}
-  - component: {fileID: 977660156}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1479,21 +1478,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &977660156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 977660154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7975373d98143cf4d9fb48bc78e6876e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttonMenuPanel: {fileID: 0}
-  _hideButtons: []
-  _showButtons: []
 --- !u!1 &979330740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1819,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092502303}
   m_CullTransparentMesh: 1
+--- !u!1 &1218056839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218056841}
+  - component: {fileID: 1218056840}
+  m_Layer: 0
+  m_Name: Palette
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1218056840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218056839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc19835bcdc6ed64d820f372b5bb96ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _paintCells:
+  - _paint: {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
+    _available: 0
+    _count: 6
+  - _paint: {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
+    _available: 0
+    _count: 0
+  _mediator: {fileID: 1487662984}
+--- !u!4 &1218056841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218056839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.81219923, y: -0.21135168, z: -0.89382714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290921767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,14 +1922,10 @@ MonoBehaviour:
   _showButton: {fileID: 1317766692}
   _hideButton: {fileID: 775438175}
   _menuPanel: {fileID: 8365517}
-  _paintPanels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _paintCellViewProvider:
     _paintCellViewPrefab: {fileID: 5943161317324774008, guid: f47aa1341943dd24b91b849a25f98d23, type: 3}
     _paintCellViewsCount: 6
+  _mediator: {fileID: 1487662984}
 --- !u!1 &1314150112
 GameObject:
   m_ObjectHideFlags: 0

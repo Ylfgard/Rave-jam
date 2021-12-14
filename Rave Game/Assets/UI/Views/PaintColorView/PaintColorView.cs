@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
-public class PaintColorView : MonoBehaviour
+public class ColorView : MonoBehaviour
 {
-    private Image _paintColor;
+    private Image _colorView;
     private void Awake()
     {
-        _paintColor = GetComponent<Image>();
+        _colorView = GetComponent<Image>();
     }
     public void SetColor(Color color)
     {
-        _paintColor.color = color;
+        _colorView.color = color;
     }
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 public class PaintCellViewProvider
 {
     [SerializeField]
-    private PaintCellView _paintCellViewPrefab;
+    private PalettePaintCellView _paintCellViewPrefab;
     [SerializeField]
     private int _paintCellViewsCount;
-    public List<PaintCellView> Provide(Transform parent = null)
+    public List<PalettePaintCellView> Provide(Transform parent = null)
     {
-        List<PaintCellView> paintCellViews = new List<PaintCellView>();
+        List<PalettePaintCellView> paintCellViews = new List<PalettePaintCellView>();
         for (int i = 0; i < _paintCellViewsCount; i++)
         {
             paintCellViews.Add(Object.Instantiate(_paintCellViewPrefab));
