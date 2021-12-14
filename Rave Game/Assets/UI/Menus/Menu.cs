@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private Button _hideButton;
     [SerializeField]
-    private Panel _menuPanel;
+    protected Panel _menuPanel;
     private void OnEnable()
     {
         _showButton.onClick.AddListener(Show);
