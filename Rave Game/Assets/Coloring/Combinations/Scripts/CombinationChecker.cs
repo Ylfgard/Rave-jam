@@ -7,13 +7,7 @@ public class CombinationChecker : MonoBehaviour
 {
     [SerializeField] private AnimalSpawner _animalSpawner;
     [SerializeField] private List<AnimalData> _animalsData;
-    [SerializeField] private List<Paint> _paints;
-
-    private void Start() 
-    {
-        AddCombination(_paints);
-    }
-
+    
     private delegate void ChoosedAction(AnimalData animalCombination);
 
     public void AddCombination(List<Paint> paints)
@@ -47,10 +41,13 @@ public class CombinationChecker : MonoBehaviour
 [Serializable]
 public class AnimalData
 {
+    [SerializeField] private string _name;
     [SerializeField] private AnimalCombination _animalCombination;
     [SerializeField] private GameObject _animalPrefab;
     [SerializeField] private Animator _animator;
     private List<Animal> _existingAnimals = new List<Animal>();
+
+    public string Name => _name;
 
     public AnimalCombination AnimalCombination => _animalCombination;
 

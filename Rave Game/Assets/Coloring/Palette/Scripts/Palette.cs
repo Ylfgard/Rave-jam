@@ -8,6 +8,14 @@ public class Palette : MonoBehaviour
     [SerializeField] private List<PaintCell> _paintCells;
     [SerializeField] private Mediator _mediator; 
     [SerializeField] private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
+
+    private void Start() {
+        foreach(PaintCell paintCell in _paintCells)
+            if(paintCell.Available)
+                _paintCellChangedCommand.PaintCells.Add(paintCell);
+        _mediator.Publish(_paintCellChangedCommand);
+    }
+
     public void UnblockPaint(string paintName)
     {
         foreach(PaintCell paintCell in _paintCells)
@@ -19,27 +27,34 @@ public class Palette : MonoBehaviour
             }
     }
 
+    public bool ChangePaintCount(PaintCell paintCell, int count)
+    {
+        if(paintCell.Available)
+        {
+            if(paintCell.ChangeCount(count))
+            {
+                _mediator.Publish(_paintCellChangedCommand);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
     public bool ChangePaintCount(string paintName, int count)
     {
-        int index = 0;
         foreach(PaintCell paintCell in _paintCells)
-            if(paintCell.Available && paintCell.Paint.Name == paintName)
+            if(paintCell.Paint.Name == paintName)
             {
-                if(paintCell.ChangeCount(count))
-                {
-                    _paintCellChangedCommand.PaintCells[index] = paintCell;
-                    _mediator.Publish(_paintCellChangedCommand);
-                    index++;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                ChangePaintCount(paintCell, count);
             }
         return false;
     }
 }
+
 [Serializable]
 public class PaintCell
 {
