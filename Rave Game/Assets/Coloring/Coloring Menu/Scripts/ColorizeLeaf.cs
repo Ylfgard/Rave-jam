@@ -11,6 +11,7 @@ public class ColorizeLeaf : MonoBehaviour
     [SerializeField] private Image _colorOutput;
     [SerializeField] private TextMeshProUGUI _countOutput;
     [SerializeField] private int _coloringPrice;
+    private CloseColoringMenuCommand _closeCommand = new CloseColoringMenuCommand();
     private Leaf _leaf;
     private PaintCell _paintCell;
 
@@ -39,14 +40,20 @@ public class ColorizeLeaf : MonoBehaviour
 
     public void Colorize() 
     {
-        if(_palette.ChangePaintCount(_paintCell, _coloringPrice))
+        if(_leaf.Colorized == false && _palette.ChangePaintCount(_paintCell, -_coloringPrice))
+        {
             _leaf.Colorize(_paintCell.Paint);
+            UpdateSelectedPaint();
+            _mediator.Publish(_closeCommand);
+        }
         else
+        {
             CantColorize();
+        }
     }
 
     private void CantColorize()
     {
-
+        Debug.Log("Cant Colorize");
     }
 }

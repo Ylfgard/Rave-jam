@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ColoringMenu : MonoBehaviour
 {
+    [SerializeField] private Transform _transform;
     [SerializeField] private Mediator _mediator;
     [SerializeField] private GameObject _menuUI;
+    [SerializeField] private float _menuYOffset;
     private List<PaintCell> _paintCells;
     private int _currentPaintIndex;
     private SelectedPaintChangedCommand _selectedPaintChangedCommand = new SelectedPaintChangedCommand();
@@ -14,7 +16,8 @@ public class ColoringMenu : MonoBehaviour
     {
         _mediator.Subscribe<Leaf>(OpenMenu);   
         _mediator.Subscribe<PaintCellChangedCommand>(UpdateAvailablePaints);
-        CloseMenu();
+        _mediator.Subscribe<CloseColoringMenuCommand>(CloseMenu);
+        CloseMenu(new CloseColoringMenuCommand());
     }
 
     private void UpdateAvailablePaints(PaintCellChangedCommand callback)
@@ -27,11 +30,14 @@ public class ColoringMenu : MonoBehaviour
     private void OpenMenu(Leaf leaf)
     {
         _currentPaintIndex = 0;
-        ChangeSelectedPaint();
+        Vector3 leafPosition = leaf.GetPosition();
+        leafPosition.y += _menuYOffset;
+        _transform.position = Camera.main.WorldToScreenPoint(leafPosition);
         ChangeMenuState(true);
+        ChangeSelectedPaint();
     }
     
-    public void CloseMenu()
+    public void CloseMenu(CloseColoringMenuCommand callback)
     {
         ChangeMenuState(false);
     }

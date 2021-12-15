@@ -11,10 +11,17 @@ public class SingleInputHandler : MonoBehaviour
     public void InputDown(Vector2 touchPos)
     {
         _lastInputPosition = touchPos;
-        RaycastHit2D ray = Physics2D.Raycast(touchPos, Vector2.zero);
+        RaycastHit2D ray = Physics2D.Raycast(touchPos, Vector2.one);
         Collider2D c2d = ray.collider;
-        if (c2d != null && c2d.gameObject.tag == "Leaf")
-            _mediator.Publish(c2d.GetComponent<Leaf>());
+        if (c2d != null)
+        {
+            if(c2d.gameObject.tag == "Leaf")
+                _mediator.Publish(c2d.GetComponent<Leaf>());
+        }
+        // else
+        // {
+        //     _mediator.Publish(new CloseColoringMenuCommand());
+        // }
     }
 
     public void InputPress(Vector2 touchPos)

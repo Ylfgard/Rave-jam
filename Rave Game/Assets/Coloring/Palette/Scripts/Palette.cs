@@ -7,9 +7,13 @@ public class Palette : MonoBehaviour
 {
     [SerializeField] private List<PaintCell> _paintCells;
     [SerializeField] private Mediator _mediator; 
-    [SerializeField] private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
+    private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
 
-    private void Start() {
+    public List<PaintCell> PaintCells => _paintCells;
+
+    private void Start() 
+    {
+        _paintCellChangedCommand.PaintCells = new List<PaintCell>();
         foreach(PaintCell paintCell in _paintCells)
             if(paintCell.Available)
                 _paintCellChangedCommand.PaintCells.Add(paintCell);

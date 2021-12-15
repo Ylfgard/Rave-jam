@@ -5,19 +5,13 @@ using System;
 
 public class CombinationChecker : MonoBehaviour
 {
+    [SerializeField] private Mediator _mediator;
     [SerializeField] private AnimalSpawner _animalSpawner;
     [SerializeField] private List<AnimalData> _animalsData;
-    
-    private delegate void ChoosedAction(AnimalData animalCombination);
 
-    public void AddCombination(List<Paint> paints)
+    private void Start()
     {
-        CheckCombination(paints, Spawn);
-    }
-
-    public void RemoveCombination(List<Paint> paints)
-    {
-        CheckCombination(paints, Despawn);
+        _mediator.Subscribe<CombinationIsAssembledCommand>(CheckCombination);
     }
 
     private void Spawn(AnimalData animalData)
@@ -30,11 +24,14 @@ public class CombinationChecker : MonoBehaviour
         _animalSpawner.DespawnAnimal(animalData);
     }
 
-    private void CheckCombination(List<Paint> paints, ChoosedAction action)
+    private void CheckCombination(CombinationIsAssembledCommand callback)
     {
         foreach(AnimalData animalData in _animalsData)
-            if(animalData.AnimalCombination.CheckCombination(paints))
-                action?.Invoke(animalData);
+            if(animalData.AnimalCombination.CheckCombination(callback.Paints))
+            {
+                if(callback.AddCombination) Spawn(animalData);
+                else Despawn(animalData);
+            }
     }
 }
 
