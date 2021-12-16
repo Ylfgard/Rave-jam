@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leaf : MonoBehaviour, ICommand
+public class Leaf : MonoBehaviour, IWithPosition
 {
     [SerializeField] private Mediator _mediator;
     [SerializeField] private SpriteRenderer _leafSprite;

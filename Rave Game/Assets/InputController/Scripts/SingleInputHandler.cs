@@ -5,6 +5,7 @@ using UnityEngine;
 public class SingleInputHandler : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
+    private CloseMenusCommand _closeMenusCommand = new CloseMenusCommand();
 
     private Vector2 _lastInputPosition;
 
@@ -15,13 +16,33 @@ public class SingleInputHandler : MonoBehaviour
         Collider2D c2d = ray.collider;
         if (c2d != null)
         {
-            if(c2d.gameObject.tag == "Leaf")
-                _mediator.Publish(c2d.GetComponent<Leaf>());
+            _mediator.Publish(_closeMenusCommand);
+            switch(c2d.gameObject.tag)
+            {
+                case "Leaf": 
+                    SendOpenMenuCommand<Leaf>(c2d.GetComponent<Leaf>(), "Leaf");
+                    return;
+                
+                case "Branch":
+                    SendOpenMenuCommand<Branch>(c2d.GetComponent<Branch>(), "Branch");
+                    return;
+
+                default:
+                    return;
+            }   
         }
         // else
         // {
         //     _mediator.Publish(new CloseColoringMenuCommand());
         // }
+    }
+
+    private void SendOpenMenuCommand<T>(T choosedObj, string id) where T : IWithPosition
+    {
+        OpenMenuCommand<T> openMenuCommand = new OpenMenuCommand<T>();
+        openMenuCommand.Object = choosedObj;
+        openMenuCommand.ID = id;
+        _mediator.Publish(openMenuCommand);
     }
 
     public void InputPress(Vector2 touchPos)

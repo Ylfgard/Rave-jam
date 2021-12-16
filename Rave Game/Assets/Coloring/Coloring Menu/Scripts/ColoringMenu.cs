@@ -1,71 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class ColoringMenu : MonoBehaviour
+public class ColoringMenu : MonoBehaviour, IIDSettable
 {
-    [SerializeField] private Transform _transform;
     [SerializeField] private Mediator _mediator;
-    [SerializeField] private GameObject _menuUI;
-    [SerializeField] private float _menuYOffset;
+    [SerializeField] private Palette _palette;
+    [SerializeField] private Image _colorOutput;
+    [SerializeField] private TextMeshProUGUI _countOutput;
+    [SerializeField] private int _coloringPrice;
+    private CloseMenusCommand _closeCommand = new CloseMenusCommand();
+    private Leaf _leaf;
     private List<PaintCell> _paintCells;
     private int _currentPaintIndex;
-    private SelectedPaintChangedCommand _selectedPaintChangedCommand = new SelectedPaintChangedCommand();
 
     private void Awake()
-    {
-        _mediator.Subscribe<Leaf>(OpenMenu);   
+    { 
+        _mediator.Subscribe<OpenMenuCommand<Leaf>>(SetMenuData);   
         _mediator.Subscribe<PaintCellChangedCommand>(UpdateAvailablePaints);
-        _mediator.Subscribe<CloseColoringMenuCommand>(CloseMenu);
-        CloseMenu(new CloseColoringMenuCommand());
+    }
+
+    private void Start()
+    {
+        SetMenuInControllerComand command = new SetMenuInControllerComand();
+        command.IDSettable = this;
+        command.Transform = this.gameObject.transform;
+        _mediator.Publish(command); 
+    }
+
+    public void SetID(string id)
+    {
+        _closeCommand.IDs.Add(id);
     }
 
     private void UpdateAvailablePaints(PaintCellChangedCommand callback)
     {
-        _paintCells = new List<PaintCell>();
-        foreach(PaintCell paintCell in callback.PaintCells)
-            _paintCells.Add(paintCell);
+        _paintCells = callback.PaintCells;
     }
 
-    private void OpenMenu(Leaf leaf)
+    private void SetMenuData(OpenMenuCommand<Leaf> callback)
     {
         _currentPaintIndex = 0;
-        Vector3 leafPosition = leaf.GetPosition();
-        leafPosition.y += _menuYOffset;
-        _transform.position = Camera.main.WorldToScreenPoint(leafPosition);
-        ChangeMenuState(true);
-        ChangeSelectedPaint();
-    }
-    
-    public void CloseMenu(CloseColoringMenuCommand callback)
-    {
-        ChangeMenuState(false);
+        _leaf = callback.Object;
+        UpdateSelectedPaint();
     }
 
-    private void ChangeMenuState(bool state)
+    public void CloseMenu()
     {
-        _menuUI.SetActive(state);
+        _mediator.Publish(_closeCommand);
     }
 
-    private void ChangeSelectedPaint()
+    public void SelectPaint(bool next)
     {
-        _selectedPaintChangedCommand.PaintCell = _paintCells[_currentPaintIndex];
-        _mediator.Publish(_selectedPaintChangedCommand);
+        if(next)
+        {
+            _currentPaintIndex++;
+            if(_currentPaintIndex >= _paintCells.Count)
+                _currentPaintIndex = 0;
+        }
+        else
+        {
+            _currentPaintIndex--;
+            if(_currentPaintIndex < 0)
+                _currentPaintIndex = _paintCells.Count - 1;
+        }
+        UpdateSelectedPaint();
     }
 
-    public void NextPaint()
+    private void UpdateSelectedPaint()
     {
-        _currentPaintIndex++;
-        if(_currentPaintIndex >= _paintCells.Count)
-            _currentPaintIndex = 0;
-        ChangeSelectedPaint();
+        var p = _paintCells[_currentPaintIndex];
+        _colorOutput.color = p.Paint.Color;
+        _countOutput.text = p.Count.ToString();
     }
 
-    public void PreviousPaint()
+    public void Colorize() 
     {
-        _currentPaintIndex--;
-        if(_currentPaintIndex < 0)
-            _currentPaintIndex = _paintCells.Count - 1;
-        ChangeSelectedPaint();
+        if(_leaf.Colorized == false && _palette.ChangePaintCount(_paintCells[_currentPaintIndex], -_coloringPrice))
+        {
+            _leaf.Colorize(_paintCells[_currentPaintIndex].Paint);
+            UpdateSelectedPaint();
+            CloseMenu();
+        }
+        else
+        {
+            CantColorize();
+        }
+    }
+
+    private void CantColorize()
+    {
+        Debug.Log("Cant Colorize");
     }
 }

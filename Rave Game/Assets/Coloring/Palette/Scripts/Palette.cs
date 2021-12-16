@@ -6,6 +6,7 @@ using System;
 public class Palette : MonoBehaviour
 {
     [SerializeField] private List<PaintCell> _paintCells;
+    [SerializeField] private int _desaturationCount;
     [SerializeField] private Mediator _mediator; 
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
 
@@ -29,6 +30,24 @@ public class Palette : MonoBehaviour
                 _mediator.Publish(_paintCellChangedCommand);
                 paintCell.MakeAvailable();
             }
+    }
+
+    public int GetDesaturationCount()
+    {
+        return _desaturationCount;
+    }
+
+    public bool UseDesaturation()
+    {
+        if(_desaturationCount > 0)
+        {
+            _desaturationCount--;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool ChangePaintCount(PaintCell paintCell, int count)
