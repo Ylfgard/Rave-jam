@@ -86,4 +86,11 @@ public class PaintCell
             return false;
         }
     }
+    public void RemoveCount(int count)
+    {
+        if (count > 0 && _count >= count)
+            _count -= count;
+        else
+            throw new InvalidOperationException();
+    }
 }
