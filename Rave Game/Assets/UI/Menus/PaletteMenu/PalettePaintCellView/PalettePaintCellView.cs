@@ -7,7 +7,6 @@ public class PalettePaintCellView : PaintCellView
     private StringView _paintNameView;
     [SerializeField]
     private NumberView _paintCountView;
-    [SerializeField]
     public override void SetPaintCell(PaintCell PaintCell)
     {
         _paintNameView.SetString(PaintCell.Paint.name);

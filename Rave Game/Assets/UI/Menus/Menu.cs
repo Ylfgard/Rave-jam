@@ -11,12 +11,12 @@ public class Menu : MonoBehaviour
     private Button _hideButton;
     [SerializeField]
     protected Panel _menuPanel;
-    private void OnEnable()
+    protected void OnEnable()
     {
         _showButton.onClick.AddListener(Show);
         _hideButton.onClick.AddListener(Hide);
     }
-    private void OnDisable()
+    protected void OnDisable()
     {
         _showButton.onClick.RemoveListener(Show);
         _hideButton.onClick.RemoveListener(Hide);

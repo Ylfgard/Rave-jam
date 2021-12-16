@@ -300,6 +300,7 @@ MonoBehaviour:
   - AMB
   - Music
   - SFX
+  - UI
   - Voice
   BanksToLoad: []
   LiveUpdatePort: 9264

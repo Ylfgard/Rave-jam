@@ -17,8 +17,8 @@ public class ColorizeLeaf : MonoBehaviour
 
     private void Awake()
     {
-        _mediator.Subscribe<Leaf>(GetSelectedLeaf);   
-        _mediator.Subscribe<SelectedPaintChangedCommand>(UpdateSelectedPaint);   
+        _mediator.Subscribe<Leaf>(GetSelectedLeaf);
+        _mediator.Subscribe<SelectedPaintChangedCommand>(UpdateSelectedPaint);
     }
 
     private void GetSelectedLeaf(Leaf leaf)
@@ -38,9 +38,9 @@ public class ColorizeLeaf : MonoBehaviour
         _countOutput.text = _paintCell.Count.ToString();
     }
 
-    public void Colorize() 
+    public void Colorize()
     {
-        if(_leaf.Colorized == false && _palette.ChangePaintCount(_paintCell, -_coloringPrice))
+        if (_leaf.Colorized == false && _palette.ChangePaintCount(_paintCell, -_coloringPrice))
         {
             _leaf.Colorize(_paintCell.Paint);
             UpdateSelectedPaint();

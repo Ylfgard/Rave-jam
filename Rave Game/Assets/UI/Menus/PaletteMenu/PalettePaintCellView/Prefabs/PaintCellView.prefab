@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5943161316101259560}
   - component: {fileID: 5943161316101259558}
   - component: {fileID: 5943161316101259559}
-  - component: {fileID: 5943161316101259557}
   m_Layer: 5
   m_Name: PaintColor
   m_TagString: Untagged
@@ -76,18 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5943161316101259557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5943161316101259561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd1769fc8f64fff4c927c615dec65fe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5943161316743933186
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +86,6 @@ GameObject:
   - component: {fileID: 5943161316743933185}
   - component: {fileID: 5943161316743933215}
   - component: {fileID: 5943161316743933184}
-  - component: {fileID: 5943161316743933214}
   m_Layer: 5
   m_Name: PaintCount
   m_TagString: Untagged
@@ -223,18 +209,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5943161316743933214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5943161316743933186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cd6d0bb8b969b4cac16c89f0e496c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5943161317276654222
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,9 +336,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6701895583fe341819406bffa16304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _paintColorView: {fileID: 5943161316101259557}
-  _paintNameView: {fileID: 5943161317376758201}
-  _paintCountView: {fileID: 5943161316743933214}
+  _paintColorView:
+    _colorView: {fileID: 5943161316101259559}
+  _paintNameView:
+    _stringView: {fileID: 5943161317376758203}
+  _paintCountView:
+    _numberView: {fileID: 5943161316743933184}
 --- !u!1 &5943161317376758205
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +353,6 @@ GameObject:
   - component: {fileID: 5943161317376758204}
   - component: {fileID: 5943161317376758202}
   - component: {fileID: 5943161317376758203}
-  - component: {fileID: 5943161317376758201}
   m_Layer: 5
   m_Name: PaintName
   m_TagString: Untagged
@@ -500,15 +476,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5943161317376758201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5943161317376758205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acae8fca8a0f0e54ab6c5e205c2c1163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

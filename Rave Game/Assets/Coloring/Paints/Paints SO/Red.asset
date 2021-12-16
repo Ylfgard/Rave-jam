@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffca406607b1d24d8d0e9da6da0a42b, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
+  _price: 1
+  _value: 1
   _name: Red
   _color: {r: 1, g: 0, b: 0, a: 1}
-  _price: 1
