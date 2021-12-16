@@ -54,7 +54,7 @@ public class Palette : MonoBehaviour
     {
         if(paintCell.Available)
         {
-            if(paintCell.ChangeCount(count))
+            if(paintCell.AddCount(count))
             {
                 _mediator.Publish(_paintCellChangedCommand);
                 return true;
@@ -83,33 +83,14 @@ public class PaintCell
 {
     [SerializeField] private Paint _paint;
     [SerializeField] private bool _available;
-    [SerializeField] private int _count;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     public Paint Paint => _paint;    
     public bool Available => _available;
-    public int Count => _count;
+    public int Count => _paint.Count;
     public void MakeAvailable()
     {
         _available = true;
     }
-    public bool ChangeCount(int count)
-    {
-        if(_count + count >= 0)
-        {
-            _count += count;
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public void RemoveCount(int count)
-    {
-        if (count > 0 && _count >= count)
-            _count -= count;
-        else
-            throw new InvalidOperationException();
-    }
+    public bool AddCount(int count) => _paint.AddCount(count);
+    public void RemoveCount(int count) => _paint.RemoveCount(count);
 }

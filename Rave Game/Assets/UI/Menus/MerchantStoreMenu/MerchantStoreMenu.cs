@@ -4,20 +4,22 @@ using UnityEngine.UI;
 public class MerchantStoreMenu : Menu
 {
     [SerializeField]
-    private List<MerchantPaintPanel> _buyPanels;
+    private List<MerchantPaintCellPanel> _buyPanels;
     [SerializeField]
     private Button _useCellsButton;
-    private void OnEnable()
+    private new void OnEnable()
     {
+        base.OnEnable();
         _useCellsButton.onClick.AddListener(UsePaintCells);
     }
-    private void OnDisable()
+    private new void OnDisable()
     {
+        base.OnDisable();
         _useCellsButton.onClick.RemoveListener(UsePaintCells);
     }
-    public void UsePaintCells()
+    private void UsePaintCells()
     {
-        foreach (MerchantPaintPanel buyPanel in _buyPanels)
+        foreach (MerchantPaintCellPanel buyPanel in _buyPanels)
             buyPanel.UsePaintCell();
     }
 }
