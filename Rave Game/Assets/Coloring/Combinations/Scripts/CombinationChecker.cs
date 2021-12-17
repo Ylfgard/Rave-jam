@@ -14,24 +14,11 @@ public class CombinationChecker : MonoBehaviour
         _mediator.Subscribe<CombinationIsAssembledCommand>(CheckCombination);
     }
 
-    private void Spawn(AnimalData animalData)
-    {
-        _animalSpawner.SpawnAnimal(animalData);
-    }
-
-    private void Despawn(AnimalData animalData)
-    {
-        _animalSpawner.DespawnAnimal(animalData);
-    }
-
     private void CheckCombination(CombinationIsAssembledCommand callback)
     {
         foreach(AnimalData animalData in _animalsData)
             if(animalData.AnimalCombination.CheckCombination(callback.Paints))
-            {
-                if(callback.AddCombination) Spawn(animalData);
-                else Despawn(animalData);
-            }
+                _animalSpawner.SendAnimalCommand(animalData, callback.AddCombination);
     }
 }
 

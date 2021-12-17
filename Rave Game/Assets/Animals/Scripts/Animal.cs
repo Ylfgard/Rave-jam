@@ -5,12 +5,14 @@ using UnityEngine;
 public class Animal : MonoBehaviour
 {
     [SerializeField] private AnimalBehavior animalBehavior;
+    private Mediator _mediator;
     private Palette _palette;
     private int _dayPassed;
 
-    public void Init(Palette palette)
+    public void Init(Palette palette, Mediator mediator)
     {
         _palette = palette;
+        _mediator = mediator;
         _dayPassed = 0;
     }
 
