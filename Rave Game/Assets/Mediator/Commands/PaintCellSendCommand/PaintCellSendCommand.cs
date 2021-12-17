@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-public class PaintCellChangedCommand : ICommand
+public class PaintCellSendCommand : ICommand
 {
     public List<PaintCell> PaintCells;
 }

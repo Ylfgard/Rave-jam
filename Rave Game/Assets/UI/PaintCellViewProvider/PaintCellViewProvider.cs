@@ -1,21 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class PaintCellViewProvider
+public class PaintCellProvider
 {
     [SerializeField]
-    private PalettePaintCellView _paintCellViewPrefab;
-    [SerializeField]
-    private int _paintCellViewsCount;
-    public List<PalettePaintCellView> Provide(Transform parent = null)
+    private PalettePaintView _paintViewPrefab;
+    private List<PaintCell> _paints;
+    public List<PalettePaintView> Provide(Transform parent = null)
     {
-        List<PalettePaintCellView> paintCellViews = new List<PalettePaintCellView>();
-        for (int i = 0; i < _paintCellViewsCount; i++)
+        List<PalettePaintView> paintViews = new List<PalettePaintView>();
+        for (int i = 0; i < _paints.Count; i++)
         {
-            paintCellViews.Add(Object.Instantiate(_paintCellViewPrefab));
-            paintCellViews[i].SetParent(parent);
+            paintViews.Add(Object.Instantiate(_paintViewPrefab));
+            paintViews[i].Initialize(_paints[i]);
+            paintViews[i].SetParent(parent);
         }
-        return paintCellViews;
+        return paintViews;
+    }
+    public void SetPaints(List<PaintCell> paints)
+    {
+        _paints = paints;
     }
 }

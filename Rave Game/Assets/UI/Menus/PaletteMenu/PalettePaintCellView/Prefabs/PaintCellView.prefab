@@ -167,10 +167,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 34.05
+  m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -297,6 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5943161317324774009}
   - component: {fileID: 5943161317324774008}
+  - component: {fileID: 5439840154116707835}
   m_Layer: 5
   m_Name: PaintCellView
   m_TagString: Untagged
@@ -342,6 +343,19 @@ MonoBehaviour:
     _stringView: {fileID: 5943161317376758203}
   _paintCountView:
     _numberView: {fileID: 5943161316743933184}
+  _palettePaintViewPanel: {fileID: 0}
+--- !u!114 &5439840154116707835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943161317324774010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ddbdc804a0c8545a6f11e9bd047180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5943161317376758205
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,10 +448,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 34.05
+  m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
