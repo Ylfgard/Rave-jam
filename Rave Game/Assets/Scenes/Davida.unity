@@ -1712,6 +1712,64 @@ MonoBehaviour:
   - {fileID: 775438175}
   - {fileID: 248317352}
   - {fileID: 1314150115}
+--- !u!1 &897746896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 897746898}
+  - component: {fileID: 897746897}
+  m_Layer: 0
+  m_Name: Palette
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &897746897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897746896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc19835bcdc6ed64d820f372b5bb96ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _paintCells:
+  - _price: 0
+    _count: 0
+    _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
+    _available: 0
+  - _price: 0
+    _count: 0
+    _paint: {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
+    _available: 0
+  - _price: 0
+    _count: 32
+    _paint: {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
+    _available: 0
+  _desaturationCount: 0
+  _mediator: {fileID: 1487662984}
+--- !u!4 &897746898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897746896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &919070974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,7 +2523,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175435811}
   m_CullTransparentMesh: 1
---- !u!1 &1218056839
+--- !u!1 &1225440795
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2473,40 +2531,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1218056841}
-  - component: {fileID: 1218056840}
+  - component: {fileID: 1225440796}
   m_Layer: 0
-  m_Name: Palette
+  m_Name: PaintProvider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1218056840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218056839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc19835bcdc6ed64d820f372b5bb96ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _paintCells:
-  - _paint: {fileID: 0}
-    _available: 0
-  _mediator: {fileID: 0}
---- !u!4 &1218056841
+--- !u!4 &1225440796
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218056839}
+  m_GameObject: {fileID: 1225440795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81219923, y: -0.21135168, z: -0.89382714}
+  m_LocalPosition: {x: 686.291, y: 516.3074, z: -3337.2336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2564,10 +2605,9 @@ MonoBehaviour:
   _showButton: {fileID: 1317766692}
   _hideButton: {fileID: 775438175}
   _menuPanel: {fileID: 8365517}
-  _paintCellViewProvider:
-    _paintCellViewPrefab: {fileID: 5943161317324774008, guid: f47aa1341943dd24b91b849a25f98d23, type: 3}
-    _paintCellViewsCount: 6
   _mediator: {fileID: 1487662984}
+  _paintPanelProvider:
+    _paintViewPrefab: {fileID: 5943161317324774008, guid: f47aa1341943dd24b91b849a25f98d23, type: 3}
 --- !u!1 &1314150112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,10 +3542,6 @@ MonoBehaviour:
   _previousItemButton: {fileID: 777351209}
   _itemIndexView:
     _numberView: {fileID: 1651749586}
-  _storeItems:
-  - {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
-  - {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
-  - {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
 --- !u!114 &1651749586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3754,7 +3790,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _addNumberButton: {fileID: 1019308187}
   _removeNumberButton: {fileID: 1477488161}
-  _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
+  _paint:
+    _price: 0
+    _count: 0
+    _paint: {fileID: 0}
+    _available: 0
   _paintCellCountView:
     _numberView: {fileID: 1996209956}
 --- !u!1 &2074284242

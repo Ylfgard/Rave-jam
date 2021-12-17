@@ -1,13 +1,13 @@
 using UnityEngine;
-public class BookMenuPaintCellView : PaintCellView
+public class BookMenuPaintCellView : PaintView
 {
     [SerializeField]
     private ColorView _paintColorView;
     [SerializeField]
     private StringView _paintNameView;
-    public override void SetPaintCell(PaintCell PaintCell)
+    public override void UpdatePaintView()
     {
-        _paintColorView.SetColor(PaintCell.Paint.Color);
-        _paintNameView.SetString(PaintCell.Paint.name);
+        _paintColorView.SetColor(_paint.Color);
+        _paintNameView.SetString(_paint.Name);
     }
 }

@@ -7,7 +7,7 @@ public class MerchantPaintCellPanel : MonoBehaviour, IParentable
     [SerializeField]
     private Button _removeNumberButton;
     [SerializeField]
-    private Paint _paint;
+    private PaintCell _paint;
     [SerializeField]
     private NumberView _paintCellCountView;
     private NumberCounter _paintCellCounter = new NumberCounter();
@@ -30,7 +30,7 @@ public class MerchantPaintCellPanel : MonoBehaviour, IParentable
     }
     public void UsePaintCell()
     {
-        _paint.RemoveCount(_paintCellCounter.Count);
+        _paint.AddCount(_paintCellCounter.Count);
         _paintCellCounter.ReseCount();
     }
 }
