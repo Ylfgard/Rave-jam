@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Red
   m_EditorClassIdentifier: 
   _price: 1
+  _count: 93
   _value: 1
   _name: Red
   _color: {r: 1, g: 0, b: 0, a: 1}

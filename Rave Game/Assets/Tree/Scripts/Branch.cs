@@ -11,24 +11,29 @@ public class Branch : MonoBehaviour, IWithPosition
 
     private void Start() 
     {
-        _mediator.Subscribe<LeafColorizedCommand>(CheckForCombination);
+        _mediator.Subscribe<LeafColorizedCommand>(CompliteCombination);
         _collider.enabled = false;
     }
     
-    private void CheckForCombination(LeafColorizedCommand callback)
+    private void CheckForCombination(bool add)
     {
         CombinationIsAssembledCommand command = new CombinationIsAssembledCommand();
+        _collider.enabled = true;
+        foreach(Leaf leaf in _leafs)
+            if(leaf.Colorized)
+                command.Paints.Add(leaf.Paint);
+        if(command.Paints.Count == _leafs.Count)
+        {
+            command.AddCombination = add;
+            _mediator.Publish(command);
+        } 
+    }
+
+    private void CompliteCombination(LeafColorizedCommand callback)
+    {
         if(_leafs.Contains(callback.Leaf))
         {
-            _collider.enabled = true;
-            foreach(Leaf leaf in _leafs)
-                if(leaf.Colorized)
-                    command.Paints.Add(leaf.Paint);
-            if(command.Paints.Count == _leafs.Count)
-            {
-                command.AddCombination = true;
-                _mediator.Publish(command);
-            } 
+            CheckForCombination(true);
         }
     }
 
@@ -40,6 +45,7 @@ public class Branch : MonoBehaviour, IWithPosition
     public void UncolorizeLeafs()
     {
         _collider.enabled = false;
+        CheckForCombination(false);
         foreach(Leaf leaf in _leafs)
             leaf.Uncolorize();
     }

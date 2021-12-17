@@ -3369,13 +3369,10 @@ MonoBehaviour:
   _paintCells:
   - _paint: {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
     _available: 1
-    _count: 4
   - _paint: {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
     _available: 0
-    _count: 0
   - _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
     _available: 0
-    _count: 0
   _desaturationCount: 3
   _mediator: {fileID: 1007347475}
 --- !u!4 &1495438350
@@ -4392,6 +4389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8841e8587e2a84582aae84194a438f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mediator: {fileID: 0}
   _palette: {fileID: 1495438349}
   _finishDayButton: {fileID: 50757858}
 --- !u!4 &1967251301
@@ -4721,5 +4719,9 @@ PrefabInstance:
       propertyPath: _leafs.Array.data[1]
       value: 
       objectReference: {fileID: 1763208117}
+    - target: {fileID: 8674111520544793476, guid: bbee9cddc3dd761469b27d9cf4fe9fe0, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbee9cddc3dd761469b27d9cf4fe9fe0, type: 3}
