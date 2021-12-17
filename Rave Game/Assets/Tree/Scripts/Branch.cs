@@ -18,7 +18,6 @@ public class Branch : MonoBehaviour, IWithPosition
     private void CheckForCombination(bool add)
     {
         CombinationIsAssembledCommand command = new CombinationIsAssembledCommand();
-        _collider.enabled = true;
         foreach(Leaf leaf in _leafs)
             if(leaf.Colorized)
                 command.Paints.Add(leaf.Paint);
@@ -34,6 +33,7 @@ public class Branch : MonoBehaviour, IWithPosition
         if(_leafs.Contains(callback.Leaf))
         {
             CheckForCombination(true);
+            _collider.enabled = true;
         }
     }
 
@@ -44,9 +44,9 @@ public class Branch : MonoBehaviour, IWithPosition
 
     public void UncolorizeLeafs()
     {
-        _collider.enabled = false;
         CheckForCombination(false);
         foreach(Leaf leaf in _leafs)
             leaf.Uncolorize();
+        _collider.enabled = false;
     }
 }

@@ -36,7 +36,14 @@ public class MenuStateController : MonoBehaviour
     {
         foreach(MenuData menuData in _menuDatas)
             if(menuData.ID == callback.ID)
-                ChangeMenuState(menuData, true, callback.Object.GetPosition());
+                ChangeMenuState(menuData, true, menuData.Transform.position);
+    }
+
+    public void OpenMenu(string ID)
+    {
+        foreach(MenuData menuData in _menuDatas)
+            if(menuData.ID == ID)
+                menuData.MenuBody.SetActive(true);
     }
 
     private void CloseMenu(CloseMenusCommand callback)

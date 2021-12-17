@@ -26,9 +26,15 @@ public class Animal : MonoBehaviour
     private void BringIncome()
     {
         if(animalBehavior.BringEssence == false)
+        {
             _palette.ChangePaintCount(animalBehavior.Paint.Name, animalBehavior.Income);
+        }
         else
-            Debug.Log("Bring essence " + animalBehavior.Income);
+        {
+            GetEssenceCommand command = new GetEssenceCommand();
+            command.Count = animalBehavior.Income;
+            _mediator.Publish(command);
+        }
         _dayPassed = 0;
     }
     
