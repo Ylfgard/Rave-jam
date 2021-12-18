@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class PaintCellProvider
+public class PaintCellProvider<T> where T : PaintView
 {
     [SerializeField]
-    private PalettePaintView _paintViewPrefab;
+    private T _paintViewPrefab;
     private List<PaintCell> _paints;
-    public List<PalettePaintView> Provide(Transform parent = null)
+    public List<T> Provide(Transform parent = null)
     {
-        List<PalettePaintView> paintViews = new List<PalettePaintView>();
+        List<T> paintViews = new List<T>();
         for (int i = 0; i < _paints.Count; i++)
         {
             paintViews.Add(Object.Instantiate(_paintViewPrefab));

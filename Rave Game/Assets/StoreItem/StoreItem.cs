@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+[Serializable]
 public class StoreItem : IBuyable, ICountable
 {
     [SerializeField]
@@ -27,5 +28,12 @@ public class StoreItem : IBuyable, ICountable
             _count -= count;
         else
             throw new InvalidOperationException();
+    }
+    public bool HasEnoughMoneyToBuy(int money)
+    {
+        if (money >= _price)
+            return true;
+        else
+            return false;
     }
 }

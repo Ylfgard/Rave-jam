@@ -23,11 +23,13 @@ public class Menu : MonoBehaviour
     }
     private void Show()
     {
+        Debug.Log("shown");
         _menuPanel.Show();
         Shown?.Invoke();
     }
     private void Hide()
     {
+        Debug.Log("Hidden");
         _menuPanel.Hide();
         Hid?.Invoke();
     }

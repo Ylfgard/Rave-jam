@@ -11,8 +11,7 @@ public class NumberCounter
     }
     public void RemoveNumber()
     {
-        if(_count - 1 >= 0)
-            _count--;
+        _count--;
         NumberChange?.Invoke(_count);
     }
     public void ReseCount()
