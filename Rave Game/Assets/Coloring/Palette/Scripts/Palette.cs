@@ -20,10 +20,10 @@ public class Palette : MonoBehaviour
         _mediator.Publish(_paintCellChangedCommand);
     }
 
-    public void UnblockPaint(string paintName)
+    public void UnblockPaint(Paint paint)
     {
         foreach (PaintCell paintCell in _paintCells)
-            if (paintCell.Paint.Name == paintName)
+            if (paintCell.Paint == paint)
             {
                 _paintCellChangedCommand.PaintCells.Add(paintCell);
                 _mediator.Publish(_paintCellChangedCommand);

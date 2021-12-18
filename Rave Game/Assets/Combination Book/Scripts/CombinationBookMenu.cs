@@ -1,30 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CombinationBookMenu : MonoBehaviour, IIDSettable
+namespace CombinationBook
 {
-    [SerializeField] private Mediator _mediator;
-    private List<PaintCell> _paintCells => new List<PaintCell>();
-    private CloseMenusCommand _closeCommand = new CloseMenusCommand();
-
-    private void Awake()
+    public class CombinationBookMenu : MonoBehaviour, IIDSettable
     {
-        _mediator.Subscribe<PaintCellChangedCommand>(AddPaint);
+        [SerializeField] private Mediator _mediator;
+        [SerializeField] private Palette _palette; 
+        [SerializeField] private GameObject _paintTab;
+        [SerializeField] private Transform _paintTabParent;
+        [SerializeField] private ToggleGroup _tabToggleGroup;
+        [SerializeField] private GameObject _page;
+        [SerializeField] private Transform _pageParent;
+        private List<BookTab> _bookTabs = new List<BookTab>();
+        private List<string> _addedAnimals = new List<string>();
+        private CloseMenusCommand _closeCommand = new CloseMenusCommand();
+
+        private void Awake()
+        {
+            _mediator.Subscribe<AnimalSpawnedCommand>(AddAnimalCombinations);
+            _mediator.Subscribe<PaintCellChangedCommand>(UnblockPaintTab);
+            foreach(PaintCell paintCell in _palette.PaintCells)
+                SpawnPaintTab(paintCell);
+        }
+
+        public void SetID(string id)
+        {
+            _closeCommand.IDs.Add(id);
+        }
+
+        public void CloseMenu()
+        {
+            _mediator.Publish(_closeCommand);
+        }
+
+        private void SpawnPaintTab(PaintCell paintCell)
+        {
+            PaintTab paintTab = Instantiate(_paintTab, _paintTabParent.position, Quaternion.identity).GetComponent<PaintTab>();
+            Page page = Instantiate(_page, _pageParent.position, Quaternion.identity).GetComponent<Page>();
+            paintTab.Initialize(_paintTabParent, _tabToggleGroup, page, paintCell.Paint);
+            page.Initialize(_pageParent);
+            BookTab bookTab = new BookTab(paintTab, page, paintCell.Name);
+            _bookTabs.Add(bookTab);
+        }
+
+        private void UnblockPaintTab(PaintCellChangedCommand callback)
+        {
+            foreach(PaintCell paintCell in callback.PaintCells)
+                foreach(BookTab bookTab in _bookTabs)
+                    if(bookTab.PaintName == paintCell.Name)
+                        bookTab.PaintTab.MakeInterractable();
+        }
+
+        private void AddAnimalCombinations(AnimalSpawnedCommand callback)
+        {
+            if(_addedAnimals.Contains(callback.AnimalData.Name))
+            {
+                return;
+            }
+            else
+            {
+                foreach(BookTab bookTab in _bookTabs)
+                    if(bookTab.PaintName == callback.AnimalBehavior.UnblockingPaint.Name)
+                    {
+                        bookTab.Page.SpawnAnimalLine(callback.AnimalData, callback.AnimalBehavior);
+                        _addedAnimals.Add(callback.AnimalData.Name);
+                    }
+            }     
+        }
     }
 
-    public void SetID(string id)
+    public class BookTab
     {
-        _closeCommand.IDs.Add(id);
-    }
+        private PaintTab _paintTab;
+        private Page _page;
+        private string _paintName;
 
-    public void CloseMenu()
-    {
-        _mediator.Publish(_closeCommand);
-    }
+        public PaintTab PaintTab => _paintTab;
 
-    private void AddPaint(PaintCellChangedCommand callback)
-    {
-        //_paintCells = callback.PaintCells;
+        public string PaintName => _paintName;
+
+        public Page Page => _page;
+
+        public BookTab(PaintTab paintTab, Page page, string paintName)
+        {
+            _paintTab = paintTab;
+            _page = page;
+            _paintName = paintName;
+        }
     }
 }

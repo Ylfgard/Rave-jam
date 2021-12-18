@@ -4,35 +4,38 @@ using UnityEngine;
 
 public class Animal : MonoBehaviour
 {
-    [SerializeField] private AnimalBehavior animalBehavior;
+    [SerializeField] private AnimalBehavior _animalBehavior;
     private Mediator _mediator;
     private Palette _palette;
     private int _dayPassed;
+
+    public AnimalBehavior AnimalBehavior => _animalBehavior;
 
     public void Init(Palette palette, Mediator mediator)
     {
         _palette = palette;
         _mediator = mediator;
         _dayPassed = 0;
+        _palette.UnblockPaint(_animalBehavior.UnblockingPaint);
     }
 
     public void EndDay()
     {
         _dayPassed++;
-        if(_dayPassed == animalBehavior.Period)
+        if(_dayPassed == _animalBehavior.Period)
             BringIncome();
     }
 
     private void BringIncome()
     {
-        if(animalBehavior.BringEssence == false)
+        if(_animalBehavior.BringEssence == false)
         {
-            _palette.ChangePaintCount(animalBehavior.Paint.Name, animalBehavior.Income);
+            _palette.ChangePaintCount(_animalBehavior.Paint.Name, _animalBehavior.Income);
         }
         else
         {
             GetEssenceCommand command = new GetEssenceCommand();
-            command.Count = animalBehavior.Income;
+            command.Count = _animalBehavior.Income;
             _mediator.Publish(command);
         }
         _dayPassed = 0;

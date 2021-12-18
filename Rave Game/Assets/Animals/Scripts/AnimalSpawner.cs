@@ -22,6 +22,10 @@ public class AnimalSpawner : MonoBehaviour
         Animal animal = Instantiate(animalData.AnimalPrefab, Vector3.zero, Quaternion.identity).GetComponent<Animal>();
         animal.Init(_palette, _mediator);
         _finishDayButton.Clicked.AddListener(animal.EndDay);
+        AnimalSpawnedCommand command = new AnimalSpawnedCommand();
+        command.AnimalData = animalData;
+        command.AnimalBehavior = animal.AnimalBehavior;
+        _mediator.Publish(command);
         animalData.AddAnimal(animal);
     }
 

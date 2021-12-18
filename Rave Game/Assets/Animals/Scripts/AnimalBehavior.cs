@@ -5,12 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AnimalBehavior", menuName = "Animal/Behavior", order = 0)]
 public class AnimalBehavior : ScriptableObject
 {
-    [SerializeField] private Paint _paint;
+    [SerializeField] private Sprite _bookSprite;
+    [SerializeField] private Paint _unblokingPaint;
+    [SerializeField] private Paint _paintIncome;
     [SerializeField] private bool _bringEssence;
     [SerializeField] private int _income;
     [SerializeField] private int _period;
 
-    public Paint Paint => _paint;
+    public Sprite BookSprite => _bookSprite;
+
+    public Paint Paint => _paintIncome;
+
+    public Paint UnblockingPaint => _unblokingPaint;
 
     public bool BringEssence => _bringEssence;
 

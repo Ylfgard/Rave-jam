@@ -8,6 +8,8 @@ public class AnimalCombination : ScriptableObject
 {
     [SerializeField] private List<Combination> _combinations;
 
+    public List<Combination> Combinations => _combinations;
+
     public bool CheckCombination(List<Paint> paints)
     {
         paints.Sort(new PaintNameComparer());
