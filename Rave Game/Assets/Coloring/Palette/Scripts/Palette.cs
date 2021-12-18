@@ -5,15 +5,17 @@ using Animals;
 
 public class Palette : MonoBehaviour
 {
+    [SerializeField] private AnimalDataKeeper _animalDataKeeper;
     [SerializeField] private Mediator _mediator;
     [SerializeField] private int _desaturationCount;
     [SerializeField] private List<PaintCell> _paintCells;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private PaintCellSendCommand _paintCellSendCommand = new PaintCellSendCommand();
     public List<PaintCell> PaintCells => _paintCells;
-
     private void Awake()
     {
+        foreach (PaintCell paintCell in _paintCells)
+            paintCell.SetAnimalDataKeeper(_animalDataKeeper);
         _mediator.Subscribe<MakePaintPriceNormalCommand>(MakePriceNormal);    
     }
 
@@ -109,7 +111,84 @@ public class PaintCell : StoreItem
     private AnimalDataKeeper _animalDataKeeper;
     public Paint Paint => _paint;
     public string Name => _paint.Name;
-    public Color Color => _paint.Color; 
+    public Color Color => _paint.Color;
+    private bool _available;
+    public bool Available => _available;
+    private int _combinationPrice;
+    private float _priceMultiplierIfThereIsNoAnimalsOnTheScene;
+    public void Initialize(int CombinationPrice, float PriceMultiplierIfThereIsNoAnimalsOnTheScene)
+    {
+        _combinationPrice = CombinationPrice;
+        _priceMultiplierIfThereIsNoAnimalsOnTheScene = PriceMultiplierIfThereIsNoAnimalsOnTheScene;
+    }
+    public void SetAnimalDataKeeper(AnimalDataKeeper animalDataKeeper)
+    {
+        _animalDataKeeper = animalDataKeeper;
+    }
+    public override bool Buy(int money)
+    {
+        if (!_available)
+        {
+            int itemPrice = Convert.ToInt32(_price * _combinationPrice);
+            if (money >= _combinationPrice)
+            {
+                _available = true;
+                UnblockCombination();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+                
+        }
+        else
+        {
+            if (NormalPrice())
+            {
+                if (money >= _price)
+                {
+                    _count++;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                int itemPrice = Convert.ToInt32(_price * _priceMultiplierIfThereIsNoAnimalsOnTheScene);
+                if (money >= itemPrice)
+                {
+                    _count++;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    public int GetPrice()
+    {
+        if (!_available)
+        {
+            return Convert.ToInt32(_price * _combinationPrice);
+        }
+        else
+        {
+            if (NormalPrice())
+            {
+                return _price;
+            }
+            else
+            {
+                return Convert.ToInt32(_price * _priceMultiplierIfThereIsNoAnimalsOnTheScene);
+            }
+        }
+    }
     public void UnblockCombination()
     {
         _animalDataKeeper.UnblockCombination(this);

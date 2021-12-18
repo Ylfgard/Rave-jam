@@ -1,30 +1,24 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
 public class StoreItemPanel : ItemSwitcher
 {
-    [SerializeField]
-    private float _priceMultiplierIfItemIsNotAvailable;
-    public int GetCurrentItemPrice()
+    public void BuyCurrentItem(List<MerchantPaintCellPanel> _paintPanels)
     {
-        if (_currentItem.Available)
-            return _currentItem.Price;
-        else
-            return Convert.ToInt32(_currentItem.Price * _priceMultiplierIfItemIsNotAvailable);
+        int totalMoney = 0;
+        foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
+            totalMoney += paintCellView.GetCount();
+        if (_currentItem.Buy(totalMoney))
+            foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
+                paintCellView.UsePaintCell(_currentItem.GetPrice());
     }
-    public bool CanBuyCurrentItem(int money)
+    private void UsePaintCells(int totalMoney)
     {
-        return _currentItem.HasEnoughMoneyToBuy(money);
-    }
-    public void BuyItem(int money)
-    {
-        if (_currentItem.Available)
+        while (totalMoney > 0)
         {
-            _currentItem.Buy(money);
+            totalMoney--;
         }
-        else
-        {
-            _currentItem.Buy(money, _priceMultiplierIfItemIsNotAvailable);
-        }
+
     }
 }

@@ -38,6 +38,5 @@ public class PaintMenu<T> : Menu where T : PaintView
         {
             palettePaintView.UpdatePaintView();
         }
-            
     }
 }

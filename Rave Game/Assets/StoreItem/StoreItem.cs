@@ -1,24 +1,15 @@
 using System;
 using UnityEngine;
 [Serializable]
-public class StoreItem : IBuyable, ICountable
+public abstract class StoreItem : IBuyable, ICountable
 {
     [SerializeField]
-    private int _price;
-    public int Price => _price;
+    protected int _price;
     [SerializeField]
     protected int _count;
     public int Count => _count;
-    protected bool _available;
-    public bool Available;
-    public void Buy(int money, float priceMultiplier = 1)
-    {
-        int itemPrice = Convert.ToInt32(_price * priceMultiplier);
-        if (money >= itemPrice)
-            _count++;
-        else
-            throw new InvalidOperationException();
-    }
+    public abstract bool Buy(int money);
+    public abstract int GetPrice();
     public void AddCount(int count)
     {
         if (count > 0)

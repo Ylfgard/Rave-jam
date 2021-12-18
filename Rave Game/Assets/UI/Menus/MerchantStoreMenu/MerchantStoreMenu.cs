@@ -7,12 +7,19 @@ public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
     private StoreItemPanel _storeItemBuyPanel;
     [SerializeField]
     private Button _buyCurrentItemButton;
+    [SerializeField]
+    private int _combinationPrice;
+    [SerializeField]
+    private float _priceIfAnimalIsNotAvailable;
     private new void Start()
     {
         base.Start();
         List<StoreItem> storeItems = new List<StoreItem>();
         for (int i = 0; i < _paints.Count; i++)
+        {
+            _paints[i].Initialize(_combinationPrice, _priceIfAnimalIsNotAvailable);
             storeItems.Add(_paints[i]);
+        }
         _storeItemBuyPanel.Initialize(storeItems);
     }
     private new void OnEnable()
@@ -29,14 +36,6 @@ public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
     }
     private void BuyCurrentItem()
     {
-        int totalMoney = 0;
-        foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
-            totalMoney += paintCellView.GetCount();
-        if (_storeItemBuyPanel.CanBuyCurrentItem(totalMoney))
-        {
-            _storeItemBuyPanel.BuyItem(totalMoney);
-            foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
-                paintCellView.UsePaintCell(_storeItemBuyPanel.GetCurrentItemPrice());
-        }
+
     }
 }
