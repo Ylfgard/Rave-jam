@@ -7,7 +7,7 @@ public class Palette : MonoBehaviour
 {
     [SerializeField] private AnimalDataKeeper _animalDataKeeper;
     [SerializeField] private Mediator _mediator;
-    [SerializeField] private int _desaturationCount;
+    [SerializeField] private Desaturation _desaturation;
     [SerializeField] private List<PaintCell> _paintCells;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private PaintCellSendCommand _paintCellSendCommand = new PaintCellSendCommand();
@@ -50,22 +50,14 @@ public class Palette : MonoBehaviour
             }
     }
 
-    public int GetDesaturationCount()
+    public Desaturation GetDesaturation()
     {
-        return _desaturationCount;
+        return _desaturation;
     }
 
-    public bool UseDesaturation()
+    public bool ChangeDesaturationCount(int count)
     {
-        if (_desaturationCount > 0)
-        {
-            _desaturationCount--;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return _desaturation.ChangeCount(count);
     }
 
     public bool ChangePaintCount(PaintCell paintCell, int count)

@@ -5,9 +5,9 @@ using UnityEngine;
 public class TreeGrower : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
+    [SerializeField] private Essence _essence;
     [SerializeField] private List<TreeLevelStage> _levelStages;
     private List<GameObject> _growedBranches = new List<GameObject>();
-    private int _curEssenceCount;
     private int _curStageIndex;
     private bool _growed;
     private TreeLevelStagesCompleteCommand _completeCommand = new TreeLevelStagesCompleteCommand();
@@ -34,8 +34,8 @@ public class TreeGrower : MonoBehaviour
     {
         if(_growed == false)
         {
-            _curEssenceCount += callback.Count;
-            if(_curEssenceCount >= _levelStages[_curStageIndex].EssenceNeed)
+            _essence.AddCount(callback.Count);
+            if(_essence.Count >= _levelStages[_curStageIndex].EssenceNeed)
                 ShowNextStage();
         }
     }
@@ -52,7 +52,6 @@ public class TreeGrower : MonoBehaviour
         {
             foreach(GameObject branch in _levelStages[_curStageIndex].Branches)
             {
-                Debug.Log("ShowThem " + branch);
                 _growedBranches.Add(branch);
                 branch.SetActive(true);
             }
