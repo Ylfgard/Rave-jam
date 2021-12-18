@@ -803,11 +803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mediator: {fileID: 1007347475}
   _animalSpawner: {fileID: 1967251300}
-  _animalsData:
-  - _name: Bee
-    _animalCombination: {fileID: 11400000, guid: d8f0265283dae8741b181d7b5f6e7e05, type: 2}
-    _animalPrefab: {fileID: 6361173195296504850, guid: 842e30ce44993614ba881617f21fc983, type: 3}
-    _animator: {fileID: 0}
+  _animalDataKeeper: {fileID: 1967251302}
 --- !u!4 &367566731
 Transform:
   m_ObjectHideFlags: 0
@@ -5378,6 +5374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1967251301}
   - component: {fileID: 1967251300}
+  - component: {fileID: 1967251302}
   m_Layer: 0
   m_Name: AnimalSpawner
   m_TagString: Untagged
@@ -5414,6 +5411,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1967251302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967251299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5eead04b2b4ee34eb1e9870646b69e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mediator: {fileID: 1007347475}
+  _animalsData:
+  - _name: Bee
+    _combination: {fileID: 11400000, guid: d8f0265283dae8741b181d7b5f6e7e05, type: 2}
+    _prefab: {fileID: 6361173195296504850, guid: 842e30ce44993614ba881617f21fc983, type: 3}
+    _behavior: {fileID: 11400000, guid: 0236381fbc1a2f243b99fe0e0dc6b8bf, type: 2}
+    _animator: {fileID: 0}
 --- !u!1 &2027093379
 GameObject:
   m_ObjectHideFlags: 0

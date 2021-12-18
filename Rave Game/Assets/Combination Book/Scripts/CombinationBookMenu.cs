@@ -17,10 +17,11 @@ namespace CombinationBook
         private List<BookTab> _bookTabs = new List<BookTab>();
         private List<string> _addedAnimals = new List<string>();
         private CloseMenusCommand _closeCommand = new CloseMenusCommand();
+        private AddedAnimalCombinationsCommand _addedAnimalsCommand = new AddedAnimalCombinationsCommand();
 
         private void Awake()
         {
-            _mediator.Subscribe<AnimalSpawnedCommand>(AddAnimalCombinations);
+            _mediator.Subscribe<AddAnimalCombinationCommand>(AddAnimalCombinations);
             _mediator.Subscribe<PaintCellChangedCommand>(UnblockPaintTab);
             foreach(PaintCell paintCell in _palette.PaintCells)
                 SpawnPaintTab(paintCell);
@@ -54,7 +55,7 @@ namespace CombinationBook
                         bookTab.PaintTab.MakeInterractable();
         }
 
-        private void AddAnimalCombinations(AnimalSpawnedCommand callback)
+        private void AddAnimalCombinations(AddAnimalCombinationCommand callback)
         {
             if(_addedAnimals.Contains(callback.AnimalData.Name))
             {
@@ -63,10 +64,13 @@ namespace CombinationBook
             else
             {
                 foreach(BookTab bookTab in _bookTabs)
-                    if(bookTab.PaintName == callback.AnimalBehavior.UnblockingPaint.Name)
+                    if(bookTab.PaintName == callback.AnimalData.Behavior.UnblockingPaint.Name)
                     {
-                        bookTab.Page.SpawnAnimalLine(callback.AnimalData, callback.AnimalBehavior);
+                        bookTab.PaintTab.MakeInterractable();
+                        bookTab.Page.SpawnAnimalLine(callback.AnimalData);
                         _addedAnimals.Add(callback.AnimalData.Name);
+                        _addedAnimalsCommand.AnimalsNames = _addedAnimals;
+                        _mediator.Publish(_addedAnimalsCommand);
                     }
             }     
         }

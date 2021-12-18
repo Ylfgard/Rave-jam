@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Animals;
 
 namespace CombinationBook
 {
@@ -15,10 +16,10 @@ namespace CombinationBook
             _transform.SetParent(parent);
         }
 
-        public void SpawnAnimalLine(AnimalData data, AnimalBehavior behavior)
+        public void SpawnAnimalLine(AnimalData data)
         {
             AnimalLine line = Instantiate(_animalLine, _animalLineParent.position, Quaternion.identity).GetComponent<AnimalLine>();
-            line.Initialize(_animalLineParent, data, behavior);
+            line.Initialize(_animalLineParent, data);
         }
     }
 }

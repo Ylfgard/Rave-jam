@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Animals;
 
 namespace CombinationBook
 {
@@ -16,19 +17,19 @@ namespace CombinationBook
         [SerializeField] private Sprite _essenceSprite;
         [SerializeField] private TextMeshProUGUI _animalIncomeCount;
 
-        public void Initialize(Transform parent, AnimalData data, AnimalBehavior behavior)
+        public void Initialize(Transform parent, AnimalData data)
         {
             _transform.SetParent(parent);
-            _animalImage.sprite = behavior.BookSprite;
+            _animalImage.sprite = data.Behavior.BookSprite;
             _animalName.text = data.Name;
-            string income = behavior.Income.ToString() + " per\n";
-            income += behavior.Period.ToString() + " day(s)";
+            string income = data.Behavior.Income.ToString() + " per\n";
+            income += data.Behavior.Period.ToString() + " day(s)";
             _animalIncomeCount.text = income;
-            if(behavior.BringEssence)
+            if(data.Behavior.BringEssence)
                 _animalIncomeImg.sprite = _essenceSprite;
             else
-                _animalIncomeImg.color = behavior.Paint.Color;
-            combinationSpawner.SpawnCombinations(data.AnimalCombination.Combinations);
+                _animalIncomeImg.color = data.Behavior.Paint.Color;
+            combinationSpawner.SpawnCombinations(data.Combination.Combinations);
         }
     }
 }
