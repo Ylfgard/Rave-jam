@@ -10,6 +10,7 @@ namespace Animals
         private Mediator _mediator;
         private Palette _palette;
         private int _dayPassed;
+        private MakePaintPriceNormalCommand command = new MakePaintPriceNormalCommand();
 
         public void Init(Palette palette, Mediator mediator)
         {
@@ -17,6 +18,9 @@ namespace Animals
             _mediator = mediator;
             _dayPassed = 0;
             _palette.UnblockPaint(_animalBehavior.UnblockingPaint);
+            command.Paint = _animalBehavior.UnblockingPaint;
+            command.Unblock = true;
+            _mediator.Publish(command);
         }
 
         public void EndDay()
@@ -43,6 +47,8 @@ namespace Animals
         
         public void Despawn()
         {
+            command.Unblock = false;
+            _mediator.Publish(command);
             Destroy(gameObject);
         }
     }

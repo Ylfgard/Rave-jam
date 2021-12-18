@@ -5,12 +5,18 @@ using Animals;
 
 public class Palette : MonoBehaviour
 {
-    [SerializeField] private List<PaintCell> _paintCells;
-    [SerializeField] private int _desaturationCount;
     [SerializeField] private Mediator _mediator;
+    [SerializeField] private int _desaturationCount;
+    [SerializeField] private List<PaintCell> _paintCells;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private PaintCellSendCommand _paintCellSendCommand = new PaintCellSendCommand();
     public List<PaintCell> PaintCells => _paintCells;
+
+    private void Awake()
+    {
+        _mediator.Subscribe<MakePaintPriceNormalCommand>(MakePriceNormal);    
+    }
+
     private void Start()
     {
         SendPaintCells();
@@ -29,6 +35,16 @@ public class Palette : MonoBehaviour
                 _paintCellChangedCommand.PaintCells.Add(paintCell);
                 _mediator.Publish(_paintCellChangedCommand);
                 paintCell.MakeAvailable();
+            }
+    }
+
+    private void MakePriceNormal(MakePaintPriceNormalCommand callback)
+    {
+        foreach(PaintCell paintCell in _paintCells)
+            if(paintCell.Paint == callback.Paint)
+            {
+                if(callback.Unblock) paintCell.ChangeUnblockingCount(1);
+                else paintCell.ChangeUnblockingCount(-1);
             }
     }
 
@@ -76,6 +92,7 @@ public class Palette : MonoBehaviour
             }
         return false;
     }
+
     private void SendPaintCells()
     {
         _paintCellSendCommand.PaintCells = _paintCells;
@@ -87,6 +104,7 @@ public class Palette : MonoBehaviour
 public class PaintCell : StoreItem
 {
     [SerializeField] private Paint _paint;
+    private int _unblockingCount;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private AnimalDataKeeper _animalDataKeeper;
     public Paint Paint => _paint;
@@ -96,9 +114,23 @@ public class PaintCell : StoreItem
     {
         _animalDataKeeper.UnblockCombination(this);
     }
+    public bool NormalPrice()
+    {   
+        if(_unblockingCount > 0) return true;
+        else return false;
+    }
     public void MakeAvailable()
     {
         _available = true;
+    }
+    public void ChangeUnblockingCount(int count)
+    {
+        _unblockingCount += count;
+        if(_unblockingCount < 0)
+        {
+            Debug.LogError("Unblock count lower than zero!");
+            _unblockingCount = 0;
+        }
     }
     public bool ChangeCount(int count)
     {
