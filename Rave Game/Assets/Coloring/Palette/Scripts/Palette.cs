@@ -86,10 +86,8 @@ public class Palette : MonoBehaviour
 public class PaintCell : StoreItem
 {
     [SerializeField] private Paint _paint;
-    [SerializeField] private bool _available;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     public Paint Paint => _paint;
-    public bool Available => _available;
     public string Name => _paint.Name;
     public Color Color => _paint.Color; 
     public void MakeAvailable()
