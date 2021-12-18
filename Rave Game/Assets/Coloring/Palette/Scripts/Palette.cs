@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Animals;
 
 public class Palette : MonoBehaviour
 {
@@ -87,9 +88,14 @@ public class PaintCell : StoreItem
 {
     [SerializeField] private Paint _paint;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
+    private AnimalDataKeeper _animalDataKeeper;
     public Paint Paint => _paint;
     public string Name => _paint.Name;
     public Color Color => _paint.Color; 
+    public void UnblockCombination()
+    {
+        _animalDataKeeper.UnblockCombination(this);
+    }
     public void MakeAvailable()
     {
         _available = true;

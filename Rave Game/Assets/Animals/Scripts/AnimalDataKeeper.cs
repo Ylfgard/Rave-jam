@@ -17,7 +17,6 @@ namespace Animals
         {
             _mediator.Subscribe<AddedAnimalCombinationsCommand>(AnimalAddedInBook);
         }
-
         public bool UnblockCombination(PaintCell paintCell)
         {
             foreach(AnimalData data in _animalsData)
