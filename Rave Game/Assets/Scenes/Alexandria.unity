@@ -1176,6 +1176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mediator: {fileID: 1007347475}
+  _essence:
+    _price: 20
+    _count: 0
+    Available: 1
   _levelStages:
   - _branches:
     - {fileID: 1851881128}
@@ -4028,20 +4032,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mediator: {fileID: 1007347475}
-  _desaturationCount: 3
+  _desaturation:
+    _price: 0
+    _count: 1
+    Available: 1
   _paintCells:
   - _price: 0
     _count: 10
+    Available: 1
     _paint: {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
-    _available: 1
   - _price: 0
     _count: 0
+    Available: 0
     _paint: {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
-    _available: 0
   - _price: 0
     _count: 0
+    Available: 0
     _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
-    _available: 0
 --- !u!4 &1495438350
 Transform:
   m_ObjectHideFlags: 0

@@ -42,12 +42,12 @@ public class DesaturationMenu : MonoBehaviour, IIDSettable
 
     private void UpdateDesaturation()
     {
-        _countOutput.text = _palette.GetDesaturationCount().ToString();
+        _countOutput.text = _palette.GetDesaturation().Count.ToString();
     }
 
     public void Desaturate() 
     {
-        if(_palette.UseDesaturation())
+        if(_palette.ChangeDesaturationCount(-1))
         {
             _branch.UncolorizeLeafs();
             UpdateDesaturation();
