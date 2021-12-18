@@ -4027,9 +4027,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc19835bcdc6ed64d820f372b5bb96ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mediator: {fileID: 1007347475}
+  _desaturationCount: 3
   _paintCells:
   - _price: 0
-    _count: 4
+    _count: 10
     _paint: {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
     _available: 1
   - _price: 0
@@ -4040,8 +4042,6 @@ MonoBehaviour:
     _count: 0
     _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
     _available: 0
-  _desaturationCount: 3
-  _mediator: {fileID: 1007347475}
 --- !u!4 &1495438350
 Transform:
   m_ObjectHideFlags: 0
