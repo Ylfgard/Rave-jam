@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ public class ItemSwitcher
     [SerializeField]
     private NumberView _itemIndexView;
     private List<StoreItem> _storeItems;
-    private StoreItem _currentItem;
+    protected StoreItem _currentItem;
     private int _count;
     public void OnEnable()
     {
@@ -59,13 +60,5 @@ public class ItemSwitcher
     private void SetDefaultStoreItem()
     {
         _currentItem = _storeItems[0];
-    }
-    public bool CanBuyCurrentItem(int money)
-    {
-        return _currentItem.HasEnoughMoneyToBuy(money);
-    }
-    public void BuyItem(int money)
-    {
-        _currentItem.Buy(money);
     }
 }

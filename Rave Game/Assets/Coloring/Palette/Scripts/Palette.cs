@@ -103,8 +103,11 @@ public class Palette : MonoBehaviour
 public class PaintCell : StoreItem
 {
     [SerializeField] private Paint _paint;
+<<<<<<< HEAD
     [SerializeField] private bool _available;
     private int _unblockingCount;
+=======
+>>>>>>> 3a6c6a8182710b21f652b593f659c0379ece5bf9
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     public Paint Paint => _paint;
     public bool Available => _available;

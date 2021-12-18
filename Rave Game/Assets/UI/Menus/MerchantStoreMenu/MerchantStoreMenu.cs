@@ -4,40 +4,39 @@ using UnityEngine.UI;
 public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
 {
     [SerializeField]
-    private ItemSwitcher _itemSwitcher;
+    private StoreItemPanel _storeItemBuyPanel;
     [SerializeField]
-    private Button _useCellsButton;
-    private BuyPanel _buyPanel;
+    private Button _buyCurrentItemButton;
     private new void Start()
     {
         base.Start();
         List<StoreItem> storeItems = new List<StoreItem>();
         for (int i = 0; i < _paints.Count; i++)
             storeItems.Add(_paints[i]);
-        _itemSwitcher.Initialize(storeItems);
+        _storeItemBuyPanel.Initialize(storeItems);
     }
     private new void OnEnable()
     {
         base.OnEnable();
-        _useCellsButton.onClick.AddListener(BuyCurrentItem);
-        _itemSwitcher.OnEnable();
+        _buyCurrentItemButton.onClick.AddListener(BuyCurrentItem);
+        _storeItemBuyPanel.OnEnable();
     }
     private new void OnDisable()
     {
         base.OnDisable();
-        _useCellsButton.onClick.RemoveListener(BuyCurrentItem);
-        _itemSwitcher.OnDisable();
+        _buyCurrentItemButton.onClick.RemoveListener(BuyCurrentItem);
+        _storeItemBuyPanel.OnDisable();
     }
     private void BuyCurrentItem()
     {
         int totalMoney = 0;
         foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
             totalMoney += paintCellView.GetCount();
-        if (_itemSwitcher.CanBuyCurrentItem(totalMoney))
+        if (_storeItemBuyPanel.CanBuyCurrentItem(totalMoney))
         {
-            _itemSwitcher.BuyItem(totalMoney);
+            _storeItemBuyPanel.BuyItem(totalMoney);
             foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
-                paintCellView.UsePaintCell();
+                paintCellView.UsePaintCell(_storeItemBuyPanel.GetCurrentItemPrice());
         }
     }
 }

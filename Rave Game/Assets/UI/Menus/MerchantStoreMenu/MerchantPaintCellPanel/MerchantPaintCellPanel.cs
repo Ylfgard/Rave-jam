@@ -25,9 +25,9 @@ public class MerchantPaintCellPanel : PaintView
         _addPaintButton.onClick.RemoveListener(UpdatePaintView);
         _removePaintButton.onClick.RemoveListener(UpdatePaintView);
     }
-    public void UsePaintCell()
+    public void UsePaintCell(int itemPrice)
     {
-        _paint.RemoveCount(_paintCellCounter.Count);
+        _paint.RemoveCount(itemPrice);
         _paintCellCounter.ReseCount();
         UpdatePaintView();
     }
