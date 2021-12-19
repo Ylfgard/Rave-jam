@@ -1,16 +1,20 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class TreeGrower : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
+    [SerializeField] private EventReference _groweSound;
     [SerializeField] private Essence _essence;
     [SerializeField] private List<TreeLevelStage> _levelStages;
     private List<GameObject> _growedBranches = new List<GameObject>();
     private int _curStageIndex;
     private bool _growed;
     private TreeLevelStagesCompleteCommand _completeCommand = new TreeLevelStagesCompleteCommand();
+
+    public Essence Essence => _essence;
 
     private void Start() 
     {
@@ -50,6 +54,7 @@ public class TreeGrower : MonoBehaviour
         }
         else
         {
+            RuntimeManager.PlayOneShot(_groweSound);
             foreach(GameObject branch in _levelStages[_curStageIndex].Branches)
             {
                 _growedBranches.Add(branch);

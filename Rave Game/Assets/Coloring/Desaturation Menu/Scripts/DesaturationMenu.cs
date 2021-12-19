@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMODUnity;
 
 public class DesaturationMenu : MonoBehaviour, IIDSettable
 {
     [SerializeField] private Mediator _mediator;
     [SerializeField] private Palette _palette;
     [SerializeField] private TextMeshProUGUI _countOutput;
+    [SerializeField] private EventReference _desaturationSound;
     private CloseMenusCommand _closeCommand = new CloseMenusCommand();
     private Branch _branch;
 
@@ -49,6 +51,7 @@ public class DesaturationMenu : MonoBehaviour, IIDSettable
     {
         if(_palette.ChangeDesaturationCount(-1))
         {
+            RuntimeManager.PlayOneShot(_desaturationSound);
             _branch.UncolorizeLeafs();
             UpdateDesaturation();
             CloseMenu();
