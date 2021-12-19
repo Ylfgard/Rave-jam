@@ -938,6 +938,20 @@ MonoBehaviour:
   _colorOutput: {fileID: 1509779551}
   _countOutput: {fileID: 852570470}
   _coloringPrice: 2
+  _leafSound:
+    Guid:
+      Data1: -1512450162
+      Data2: 1255228527
+      Data3: -810649216
+      Data4: 1207179806
+    Path: event:/SFX/click_leave
+  _coloringSound:
+    Guid:
+      Data1: -483958504
+      Data2: 1084281985
+      Data3: -414177395
+      Data4: 1472596402
+    Path: event:/SFX/paint
 --- !u!1 &425861511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,10 +1190,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mediator: {fileID: 1007347475}
+  _groweSound:
+    Guid:
+      Data1: -446288523
+      Data2: 1219567260
+      Data3: 96940216
+      Data4: 821014216
+    Path: event:/SFX/appear branch
   _essence:
     _price: 20
     _count: 0
-    Available: 1
   _levelStages:
   - _branches:
     - {fileID: 1851881128}
@@ -4031,24 +4051,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc19835bcdc6ed64d820f372b5bb96ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animalDataKeeper: {fileID: 1967251302}
   _mediator: {fileID: 1007347475}
   _desaturation:
     _price: 0
     _count: 1
-    Available: 1
   _paintCells:
   - _price: 0
     _count: 10
-    Available: 1
     _paint: {fileID: 11400000, guid: ff545459ad776bb479e5b3525f60be2d, type: 2}
+    _available: 1
   - _price: 0
     _count: 0
-    Available: 0
     _paint: {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
+    _available: 0
   - _price: 0
     _count: 0
-    Available: 0
     _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
+    _available: 0
 --- !u!4 &1495438350
 Transform:
   m_ObjectHideFlags: 0
@@ -4283,6 +4303,8 @@ GameObject:
   - component: {fileID: 1537086184}
   - component: {fileID: 1537086186}
   - component: {fileID: 1537086185}
+  - component: {fileID: 1537086188}
+  - component: {fileID: 1537086187}
   m_Layer: 5
   m_Name: Book UI
   m_TagString: Untagged
@@ -4350,6 +4372,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537086183}
   m_CullTransparentMesh: 1
+--- !u!114 &1537086187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537086183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 578475427
+      Data2: 1292503483
+      Data3: 1778820010
+      Data4: -352917389
+    Path: event:/SFX/close_book
+  Event: 
+  PlayEvent: 12
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1537086188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537086183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 84794374
+      Data2: 1330554428
+      Data3: -2105888380
+      Data4: -1912299317
+    Path: event:/SFX/Open_book
+  Event: 
+  PlayEvent: 11
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &1544867909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3027277375896277024, guid: bbee9cddc3dd761469b27d9cf4fe9fe0, type: 3}
@@ -5099,6 +5181,13 @@ MonoBehaviour:
   _mediator: {fileID: 1007347475}
   _palette: {fileID: 1495438349}
   _countOutput: {fileID: 564591687}
+  _desaturationSound:
+    Guid:
+      Data1: 699333521
+      Data2: 1238128400
+      Data3: 1765605299
+      Data4: -945343568
+    Path: event:/SFX/white paint
 --- !u!224 &1821927279
 RectTransform:
   m_ObjectHideFlags: 0

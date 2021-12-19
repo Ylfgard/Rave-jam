@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMODUnity;
 
 public class ColoringMenu : MonoBehaviour, IIDSettable
 {
@@ -11,6 +12,8 @@ public class ColoringMenu : MonoBehaviour, IIDSettable
     [SerializeField] private Image _colorOutput;
     [SerializeField] private TextMeshProUGUI _countOutput;
     [SerializeField] private int _coloringPrice;
+    [SerializeField] private EventReference _leafSound;
+    [SerializeField] private EventReference _coloringSound;
     private CloseMenusCommand _closeCommand = new CloseMenusCommand();
     private Leaf _leaf;
     private List<PaintCell> _paintCells;
@@ -42,6 +45,7 @@ public class ColoringMenu : MonoBehaviour, IIDSettable
 
     private void SetMenuData(OpenMenuCommand<Leaf> callback)
     {
+        RuntimeManager.PlayOneShot(_leafSound);
         _currentPaintIndex = 0;
         _leaf = callback.Object;
         UpdateSelectedPaint();
@@ -80,6 +84,7 @@ public class ColoringMenu : MonoBehaviour, IIDSettable
     {
         if(_leaf.Colorized == false && _palette.ChangePaintCount(_paintCells[_currentPaintIndex], -_coloringPrice))
         {
+            RuntimeManager.PlayOneShot(_coloringSound);
             _leaf.Colorize(_paintCells[_currentPaintIndex].Paint);
             UpdateSelectedPaint();
             CloseMenu();
