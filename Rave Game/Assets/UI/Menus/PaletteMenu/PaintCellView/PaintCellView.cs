@@ -15,7 +15,7 @@ public abstract class PaintView : MonoBehaviour, IParentable
     public abstract void UpdatePaintView();
     public virtual void SetParent(Transform parent)
     {
-        transform.parent = parent;
+        transform.SetParent(parent);
     }
     protected void ShowPanelIfPaintAvalible()
     {
