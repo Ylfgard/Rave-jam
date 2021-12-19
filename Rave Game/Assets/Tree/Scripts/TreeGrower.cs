@@ -8,6 +8,7 @@ public class TreeGrower : MonoBehaviour
     [SerializeField] private Mediator _mediator;
     [SerializeField] private EventReference _groweSound;
     [SerializeField] private FMODUnity.StudioEventEmitter _emitter;
+    [SerializeField] private EventReference _winSound;
     [SerializeField] private Essence _essence;
     [SerializeField] private List<TreeLevelStage> _levelStages;
     private List<GameObject> _growedBranches = new List<GameObject>();
@@ -50,6 +51,7 @@ public class TreeGrower : MonoBehaviour
         _curStageIndex++;
         if(_curStageIndex >= _levelStages.Count)
         {
+            RuntimeManager.PlayOneShot(_winSound);
             _mediator.Publish(_completeCommand);
             _growed = true;
         }

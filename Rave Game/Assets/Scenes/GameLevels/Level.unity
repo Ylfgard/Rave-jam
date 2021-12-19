@@ -295,6 +295,13 @@ MonoBehaviour:
       Data4: 821014216
     Path: event:/SFX/appear branch
   _emitter: {fileID: 619632641}
+  _winSound:
+    Guid:
+      Data1: 620384538
+      Data2: 1313030680
+      Data3: 746160769
+      Data4: -130843770
+    Path: event:/SFX/win
   _essence:
     _itemSprite: {fileID: 0}
     _price: 0
@@ -1044,15 +1051,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2061499888171752181, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2061499888171752181, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2061499888171752181, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2061499888259363428, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
       propertyPath: m_Pivot.x
@@ -1156,10 +1163,14 @@ PrefabInstance:
       objectReference: {fileID: 7806924652442214901}
     - target: {fileID: 2061499888626795351, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2061499888626795351, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2061499888686921110, guid: 9b4873a8a1b0519448e9509fb5f5deaa, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1222,7 +1233,7 @@ MonoBehaviour:
       Data4: 1565048536
     Path: event:/Music/Music
   Event: 
-  PlayEvent: 1
+  PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
@@ -1484,6 +1495,129 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1039920771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039920775}
+  - component: {fileID: 1039920774}
+  - component: {fileID: 1039920773}
+  - component: {fileID: 1039920772}
+  m_Layer: 0
+  m_Name: LevelSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1039920772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039920771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1733767991
+      Data2: 1169778482
+      Data3: 953343637
+      Data4: -1436705037
+    Path: event:/AMB/Bird
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1039920773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039920771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1282299571
+      Data2: 1187985638
+      Data3: 476397979
+      Data4: 1989880660
+    Path: event:/AMB/Amb_birds
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1039920774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039920771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -619299581
+      Data2: 1080622713
+      Data3: 1950177676
+      Data4: 487978053
+    Path: event:/AMB/Ambience
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &1039920775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039920771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 698.6857, y: 1020.23346, z: -902.9797}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1163165206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1867,13 @@ MonoBehaviour:
   Clicked:
     m_PersistentCalls:
       m_Calls: []
+  _endDaySound:
+    Guid:
+      Data1: -1662223789
+      Data2: 1199609315
+      Data3: -1518199627
+      Data4: -1471029197
+    Path: event:/SFX/finish
 --- !u!114 &1360778211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2583,12 +2724,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7806924652442214901}
     - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _hintSound.Path
+      value: event:/SFX/Buy
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
       propertyPath: _animalDataKeeper
       value: 
       objectReference: {fileID: 1409364376}
     - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _sellPainSound.Path
+      value: event:/SFX/sell
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
       propertyPath: _desaturation._count
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _hintSound.Guid.Data1
+      value: -1524475601
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _hintSound.Guid.Data2
+      value: 1333841646
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _hintSound.Guid.Data3
+      value: 9004935
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _hintSound.Guid.Data4
+      value: -1401828412
       objectReference: {fileID: 0}
     - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
       propertyPath: _storeItemSendCommand
@@ -2597,6 +2762,22 @@ PrefabInstance:
     - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
       propertyPath: _paintCells.Array.size
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _sellPainSound.Guid.Data1
+      value: 3346150
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _sellPainSound.Guid.Data2
+      value: 1121572955
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _sellPainSound.Guid.Data3
+      value: 1158521260
+      objectReference: {fileID: 0}
+    - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
+      propertyPath: _sellPainSound.Guid.Data4
+      value: 330140777
       objectReference: {fileID: 0}
     - target: {fileID: 182299001218791372, guid: 0239b95e30056034681236c41419ac40, type: 3}
       propertyPath: _paintCells.Array.data[0]._count
