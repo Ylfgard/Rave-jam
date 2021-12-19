@@ -3,12 +3,12 @@ using UnityEngine;
 public class PaintMenu<T> : Menu where T : PaintView
 {
     [SerializeField]
-    private Mediator _mediator;
+    protected Mediator _mediator;
     protected List<PaintCell> _paints;
     [SerializeField]
     private PaintCellProvider<T> _paintPanelProvider;
     protected List<T> _paintPanels;
-    private void Awake()
+    protected void Awake()
     {
         _mediator.Subscribe<PaintCellSendCommand>(RecivePaintCells);
     }

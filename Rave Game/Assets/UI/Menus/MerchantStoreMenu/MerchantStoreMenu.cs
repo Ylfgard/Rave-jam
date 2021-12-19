@@ -11,16 +11,24 @@ public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
     private int _combinationPrice;
     [SerializeField]
     private float _priceIfAnimalIsNotAvailable;
+    [SerializeField]
+    private int _totalMoney;
+    [SerializeField]
+    private CanAffortImage _canAffortImage;
+    private new void Awake()
+    {
+        base.Awake();
+        _mediator.Subscribe<StoreItemSendCommand>(_storeItemBuyPanel.Initialize);
+    }
     private new void Start()
     {
         base.Start();
-        List<StoreItem> storeItems = new List<StoreItem>();
-        for (int i = 0; i < _paints.Count; i++)
+        foreach (MerchantPaintCellPanel merchantPaintCellPanel in _paintPanels)
         {
-            _paints[i].Initialize(_combinationPrice, _priceIfAnimalIsNotAvailable);
-            storeItems.Add(_paints[i]);
+            merchantPaintCellPanel.ChangePaintCount += UpdateTotalMoney;
+            merchantPaintCellPanel.InitializePaint(_combinationPrice, _priceIfAnimalIsNotAvailable);
         }
-        _storeItemBuyPanel.Initialize(storeItems);
+            
     }
     private new void OnEnable()
     {
@@ -33,9 +41,18 @@ public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
         base.OnDisable();
         _buyCurrentItemButton.onClick.RemoveListener(BuyCurrentItem);
         _storeItemBuyPanel.OnDisable();
+        foreach (MerchantPaintCellPanel merchantPaintCellPanel in _paintPanels)
+            merchantPaintCellPanel.ChangePaintCount -= UpdateTotalMoney;
     }
     private void BuyCurrentItem()
     {
-
+        _storeItemBuyPanel.BuyCurrentItem(_paintPanels, ref _totalMoney);
+    }
+    private void UpdateTotalMoney()
+    {
+        _totalMoney = 0;
+        foreach (MerchantPaintCellPanel merchantPaintCellPanel in _paintPanels)
+            _totalMoney += merchantPaintCellPanel.GetCount();
+        _canAffortImage.ChangeAffortColor(_totalMoney, _storeItemBuyPanel.GetCurrentItemPrice());
     }
 }

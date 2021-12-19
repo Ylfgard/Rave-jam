@@ -11,6 +11,7 @@ public class Palette : MonoBehaviour
     [SerializeField] private List<PaintCell> _paintCells;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private PaintCellSendCommand _paintCellSendCommand = new PaintCellSendCommand();
+    private StoreItemSendCommand _storeItemSendCommand = new StoreItemSendCommand();
     public List<PaintCell> PaintCells => _paintCells;
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class Palette : MonoBehaviour
     private void Start()
     {
         SendPaintCells();
+        SendStoreItems();
         _paintCellChangedCommand.PaintCells = new List<PaintCell>();
         foreach (PaintCell paintCell in _paintCells)
             if (paintCell.Available)
@@ -86,11 +88,17 @@ public class Palette : MonoBehaviour
             }
         return false;
     }
-
     private void SendPaintCells()
     {
         _paintCellSendCommand.PaintCells = _paintCells;
         _mediator.Publish(_paintCellSendCommand);
+    }
+    private void SendStoreItems()
+    {
+        foreach (PaintCell paintCell in _paintCells)
+            _storeItemSendCommand.Add(paintCell);
+        _storeItemSendCommand.Add(_desaturation);
+        _mediator.Publish(_storeItemSendCommand);
     }
 }
 
@@ -119,6 +127,7 @@ public class PaintCell : StoreItem
     }
     public override bool Buy(int money)
     {
+        Debug.Log("asiohdoiawdhasodoadha9dhasodhaodhasdhaiodhsodhasodh");
         if (!_available)
         {
             int itemPrice = Convert.ToInt32(_price * _combinationPrice);
@@ -140,6 +149,9 @@ public class PaintCell : StoreItem
             {
                 if (money >= _price)
                 {
+                    Debug.Log("what??????????");
+                    Debug.Log(_price);
+                    Debug.Log(money);
                     _count++;
                     return true;
                 }
@@ -163,23 +175,30 @@ public class PaintCell : StoreItem
             }
         }
     }
-    public int GetPrice()
+    public override int GetPrice()
     {
         if (!_available)
         {
-            return Convert.ToInt32(_price * _combinationPrice);
+            Debug.Log(_combinationPrice);
+            return _combinationPrice;
         }
         else
         {
             if (NormalPrice())
             {
+                Debug.Log(_price);
                 return _price;
             }
             else
             {
+                Debug.Log(Convert.ToInt32(_price * _priceMultiplierIfThereIsNoAnimalsOnTheScene));
                 return Convert.ToInt32(_price * _priceMultiplierIfThereIsNoAnimalsOnTheScene);
             }
         }
+    }
+    public override bool HasEnoughMoneyToBuy(int money)
+    {
+        return money >= GetPrice();
     }
     public void UnblockCombination()
     {

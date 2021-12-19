@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
-public class ItemSwitcher
+public class StoreItemSwitcher
 {
     [SerializeField]
     private Button _nextStoreItemButton;
@@ -23,9 +23,9 @@ public class ItemSwitcher
         _nextStoreItemButton.onClick.RemoveListener(MoveToNextItem);
         _previousItemButton.onClick.RemoveListener(MoveToPreviousItem);
     }
-    public void Initialize(List<StoreItem> storeItems)
+    public void Initialize(StoreItemSendCommand callBack)
     {
-        _storeItems = storeItems;
+        _storeItems = callBack.StoreItems;
         SetDefaultStoreItem();
     }
     private void MoveToNextItem()

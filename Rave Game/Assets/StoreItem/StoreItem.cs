@@ -8,8 +8,22 @@ public abstract class StoreItem : IBuyable, ICountable
     [SerializeField]
     protected int _count;
     public int Count => _count;
-    public abstract bool Buy(int money);
-    public abstract int GetPrice();
+    public virtual bool Buy(int money)
+    {
+        if (money >= _price)
+        {
+            _count++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public virtual int GetPrice()
+    {
+        return _price;
+    }
     public void AddCount(int count)
     {
         if (count > 0)
@@ -24,7 +38,7 @@ public abstract class StoreItem : IBuyable, ICountable
         else
             throw new InvalidOperationException();
     }
-    public bool HasEnoughMoneyToBuy(int money)
+    public virtual bool HasEnoughMoneyToBuy(int money)
     {
         if (money >= _price)
             return true;

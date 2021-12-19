@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class MerchantPaintCellPanel : PaintView
@@ -11,6 +12,7 @@ public class MerchantPaintCellPanel : PaintView
     [SerializeField]
     private ColorView _paintColorView;
     private NumberCounter _paintCellCounter = new NumberCounter();
+    public event Action ChangePaintCount;
     private void OnEnable()
     {
         _addPaintButton.onClick.AddListener(AddPaint);
@@ -25,9 +27,14 @@ public class MerchantPaintCellPanel : PaintView
         _addPaintButton.onClick.RemoveListener(UpdatePaintView);
         _removePaintButton.onClick.RemoveListener(UpdatePaintView);
     }
-    public void UsePaintCell(int itemPrice)
+    public void InitializePaint(int CombinationPrice, float priceIfAnimalIsNotAvaible)
     {
-        _paint.RemoveCount(itemPrice);
+        _paint.Initialize(CombinationPrice, priceIfAnimalIsNotAvaible);
+    }
+    public void UsePaintCell()
+    {
+        Debug.Log(_paintCellCounter.Count);
+        _paint.RemoveCount(_paintCellCounter.Count);
         _paintCellCounter.ReseCount();
         UpdatePaintView();
     }
@@ -40,12 +47,19 @@ public class MerchantPaintCellPanel : PaintView
     private void AddPaint()
     {
         if (_paintCellCounter.Count + 1 <= _paint.Count)
+        {
             _paintCellCounter.AddNumber();
+            ChangePaintCount?.Invoke();
+        }
+
     }
     private void RemovePaint()
     {
         if (_paintCellCounter.Count - 1 >= 0)
+        {
             _paintCellCounter.RemoveNumber();
+            ChangePaintCount?.Invoke();
+        }
     }
     
 }

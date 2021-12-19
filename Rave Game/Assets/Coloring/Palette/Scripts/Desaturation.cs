@@ -16,4 +16,20 @@ public class Desaturation : StoreItem
             return false;
         }
     }
+    public override bool Buy(int money)
+    {
+        if (money >= _price)
+        {
+            _count++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public override int GetPrice()
+    {
+        return _price;
+    }
 }

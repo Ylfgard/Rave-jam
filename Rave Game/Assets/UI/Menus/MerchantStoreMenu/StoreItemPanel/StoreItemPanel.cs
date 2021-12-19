@@ -2,23 +2,22 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
-public class StoreItemPanel : ItemSwitcher
+public class StoreItemPanel : StoreItemSwitcher
 {
-    public void BuyCurrentItem(List<MerchantPaintCellPanel> _paintPanels)
+    public void BuyCurrentItem(List<MerchantPaintCellPanel> _paintPanels, ref int money)
     {
-        int totalMoney = 0;
-        foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
-            totalMoney += paintCellView.GetCount();
-        if (_currentItem.Buy(totalMoney))
-            foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
-                paintCellView.UsePaintCell(_currentItem.GetPrice());
-    }
-    private void UsePaintCells(int totalMoney)
-    {
-        while (totalMoney > 0)
+        if (_currentItem.HasEnoughMoneyToBuy(money))
         {
-            totalMoney--;
+            _currentItem.Buy(money);
+            money = 0;
+            foreach (MerchantPaintCellPanel paintCellView in _paintPanels)
+            {
+                paintCellView.UsePaintCell();
+            }
         }
-
+    }
+    public int GetCurrentItemPrice()
+    {
+        return _currentItem.GetPrice();
     }
 }
