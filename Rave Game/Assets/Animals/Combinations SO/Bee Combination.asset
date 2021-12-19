@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bee Combination
   m_EditorClassIdentifier: 
   _combinations:
-  - {fileID: 11400000, guid: 497c3b94cc0892b45acffc8b3efa766a, type: 2}
-  - {fileID: 11400000, guid: 6e0474c3b619f4e419f7579b75d016f0, type: 2}
+  - {fileID: 11400000, guid: 23974b879f3acc34a80a996983e0eafb, type: 2}
+  - {fileID: 11400000, guid: be8883d74dbba064eacb97c6554d0792, type: 2}
