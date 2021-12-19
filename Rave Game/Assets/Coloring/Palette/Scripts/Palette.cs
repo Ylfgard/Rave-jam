@@ -106,13 +106,13 @@ public class Palette : MonoBehaviour
 public class PaintCell : StoreItem
 {
     [SerializeField] private Paint _paint;
+    [SerializeField] private bool _available;
     private int _unblockingCount;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private AnimalDataKeeper _animalDataKeeper;
     public Paint Paint => _paint;
     public string Name => _paint.Name;
     public Color Color => _paint.Color;
-    private bool _available;
     public bool Available => _available;
     private int _combinationPrice;
     private float _priceMultiplierIfThereIsNoAnimalsOnTheScene;
