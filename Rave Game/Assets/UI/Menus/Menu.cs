@@ -11,6 +11,8 @@ public class Menu : MonoBehaviour
     private Button _hideButton;
     [SerializeField]
     protected Panel _menuPanel;
+    [SerializeField]
+    protected Transform _panelTransform;
     protected void OnEnable()
     {
         _showButton.onClick.AddListener(Show);
