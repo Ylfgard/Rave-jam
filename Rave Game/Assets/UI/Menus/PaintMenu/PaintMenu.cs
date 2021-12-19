@@ -19,6 +19,7 @@ public class PaintMenu<T> : Menu where T : PaintView
         _paintPanelProvider.SetPaints(_paints);
         _paintPanels = _paintPanelProvider.Provide(_menuPanel.transform);
         Shown += UpdatePaintPanels;
+        UpdatePaintPanels();
     }
     private new void OnEnable()
     {

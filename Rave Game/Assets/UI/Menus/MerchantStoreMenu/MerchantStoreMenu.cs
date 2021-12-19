@@ -28,13 +28,13 @@ public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
             merchantPaintCellPanel.ChangePaintCount += UpdateTotalMoney;
             merchantPaintCellPanel.InitializePaint(_combinationPrice, _priceIfAnimalIsNotAvailable);
         }
-            
     }
     private new void OnEnable()
     {
         base.OnEnable();
         _buyCurrentItemButton.onClick.AddListener(BuyCurrentItem);
         _storeItemBuyPanel.OnEnable();
+        _storeItemBuyPanel.BuyItem += UpdateTotalMoney;
     }
     private new void OnDisable()
     {
@@ -43,6 +43,7 @@ public class MerchantStoreMenu : PaintMenu<MerchantPaintCellPanel>
         _storeItemBuyPanel.OnDisable();
         foreach (MerchantPaintCellPanel merchantPaintCellPanel in _paintPanels)
             merchantPaintCellPanel.ChangePaintCount -= UpdateTotalMoney;
+        _storeItemBuyPanel.BuyItem -= UpdateTotalMoney;
     }
     private void BuyCurrentItem()
     {

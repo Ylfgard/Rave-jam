@@ -5,6 +5,8 @@ using Animals;
 
 public class Palette : MonoBehaviour
 {
+    [SerializeField] private FMODUnity.EventReference _sellPainSound;
+    [SerializeField] private FMODUnity.EventReference _hintSound;
     [SerializeField] private AnimalDataKeeper _animalDataKeeper;
     [SerializeField] private Mediator _mediator;
     [SerializeField] private Desaturation _desaturation;
@@ -15,8 +17,7 @@ public class Palette : MonoBehaviour
     public List<PaintCell> PaintCells => _paintCells;
     private void Awake()
     {
-        foreach (PaintCell paintCell in _paintCells)
-            paintCell.SetAnimalDataKeeper(_animalDataKeeper);
+        InitializePaintCells();
         _mediator.Subscribe<MakePaintPriceNormalCommand>(MakePriceNormal);
         SendPaintCells();
         SendStoreItems();
@@ -100,11 +101,22 @@ public class Palette : MonoBehaviour
         _storeItemSendCommand.Add(_desaturation);
         _mediator.Publish(_storeItemSendCommand);
     }
+    private void InitializePaintCells()
+    {
+        foreach (PaintCell paintCell in _paintCells)
+        {
+            paintCell.SetAnimalDataKeeper(_animalDataKeeper);
+            paintCell.SetSellSound(_sellPainSound);
+            paintCell.SetHintSound(_hintSound);
+        }
+    }
 }
 
 [Serializable]
 public class PaintCell : StoreItem
 {
+    private FMODUnity.EventReference _sellPainSound;
+    private FMODUnity.EventReference _hintSound;
     [SerializeField] private Paint _paint;
     [SerializeField] private bool _available;
     private int _unblockingCount;
@@ -121,13 +133,20 @@ public class PaintCell : StoreItem
         _combinationPrice = CombinationPrice;
         _priceMultiplierIfThereIsNoAnimalsOnTheScene = PriceMultiplierIfThereIsNoAnimalsOnTheScene;
     }
+    public void SetSellSound(FMODUnity.EventReference sellSound)
+    {
+        _sellPainSound = sellSound;
+    }
+    public void SetHintSound(FMODUnity.EventReference hintSound)
+    {
+        _hintSound = hintSound;
+    }
     public void SetAnimalDataKeeper(AnimalDataKeeper animalDataKeeper)
     {
         _animalDataKeeper = animalDataKeeper;
     }
     public override bool Buy(int money)
     {
-        Debug.Log("asiohdoiawdhasodoadha9dhasodhaodhasdhaiodhsodhasodh");
         if (!_available)
         {
             int itemPrice = Convert.ToInt32(_price * _combinationPrice);
@@ -135,6 +154,7 @@ public class PaintCell : StoreItem
             {
                 _available = true;
                 UnblockCombination();
+                FMODUnity.RuntimeManager.PlayOneShot(_hintSound);
                 return true;
             }
             else
@@ -149,9 +169,6 @@ public class PaintCell : StoreItem
             {
                 if (money >= _price)
                 {
-                    Debug.Log("what??????????");
-                    Debug.Log(_price);
-                    Debug.Log(money);
                     _count++;
                     return true;
                 }
@@ -179,19 +196,16 @@ public class PaintCell : StoreItem
     {
         if (!_available)
         {
-            Debug.Log(_combinationPrice);
             return _combinationPrice;
         }
         else
         {
             if (NormalPrice())
             {
-                Debug.Log(_price);
                 return _price;
             }
             else
             {
-                Debug.Log(Convert.ToInt32(_price * _priceMultiplierIfThereIsNoAnimalsOnTheScene));
                 return Convert.ToInt32(_price * _priceMultiplierIfThereIsNoAnimalsOnTheScene);
             }
         }
@@ -218,7 +232,6 @@ public class PaintCell : StoreItem
         _unblockingCount += count;
         if(_unblockingCount < 0)
         {
-            Debug.LogError("Unblock count lower than zero!");
             _unblockingCount = 0;
         }
     }
@@ -233,6 +246,14 @@ public class PaintCell : StoreItem
         else
         {
             return false;
+        }
+    }
+    public override void RemoveCount(int count)
+    {
+        if (count > 0 && _count >= count)
+        {
+            _count -= count;
+            FMODUnity.RuntimeManager.PlayOneShot(_sellPainSound);
         }
     }
 }
