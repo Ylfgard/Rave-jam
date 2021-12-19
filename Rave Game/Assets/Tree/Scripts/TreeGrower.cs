@@ -7,6 +7,7 @@ public class TreeGrower : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
     [SerializeField] private EventReference _groweSound;
+    [SerializeField] private FMODUnity.StudioEventEmitter _emitter;
     [SerializeField] private Essence _essence;
     [SerializeField] private List<TreeLevelStage> _levelStages;
     private List<GameObject> _growedBranches = new List<GameObject>();
@@ -55,6 +56,7 @@ public class TreeGrower : MonoBehaviour
         else
         {
             RuntimeManager.PlayOneShot(_groweSound);
+            _emitter.SetParameter("Progress", _levelStages[_curStageIndex].FMODParametr);
             foreach(GameObject branch in _levelStages[_curStageIndex].Branches)
             {
                 _growedBranches.Add(branch);
@@ -67,10 +69,13 @@ public class TreeGrower : MonoBehaviour
 [Serializable]
 public class TreeLevelStage 
 {
-    [SerializeField] private List<GameObject> _branches;
     [SerializeField] private int _nextStageEssenceNeed;
-
-    public List<GameObject> Branches => _branches;
+    [SerializeField] private int _fmodParametr;
+    [SerializeField] private List<GameObject> _branches;
 
     public int EssenceNeed => _nextStageEssenceNeed;
+
+    public int FMODParametr => _fmodParametr;
+    
+    public List<GameObject> Branches => _branches;
 }
