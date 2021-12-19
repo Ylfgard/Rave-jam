@@ -6,35 +6,44 @@ public class SingleInputHandler : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
     private CloseMenusCommand _closeMenusCommand = new CloseMenusCommand();
-
+    private bool _menuOpen;
     private Vector2 _lastInputPosition;
+
+    private void Awake() 
+    {
+        _mediator.Subscribe<MenuStateChangedCommand>(MenuStateChanged);
+    }
 
     public void InputDown(Vector2 touchPos)
     {
-        _lastInputPosition = touchPos;
-        RaycastHit2D ray = Physics2D.Raycast(touchPos, Vector2.one);
-        Collider2D c2d = ray.collider;
-        if (c2d != null)
+        if(_menuOpen == false)
         {
-            _mediator.Publish(_closeMenusCommand);
-            switch(c2d.gameObject.tag)
+            _lastInputPosition = touchPos;
+            RaycastHit2D ray = Physics2D.Raycast(touchPos, Vector2.one * 0.0001f);
+            Collider2D c2d = ray.collider;
+            if (c2d != null)
             {
-                case "Leaf": 
-                    SendOpenMenuCommand<Leaf>(c2d.GetComponent<Leaf>(), "Leaf");
-                    return;
-                
-                case "Branch":
-                    SendOpenMenuCommand<Branch>(c2d.GetComponent<Branch>(), "Branch");
-                    return;
+                _mediator.Publish(_closeMenusCommand);
+                switch(c2d.gameObject.tag)
+                {
+                    case "Leaf": 
+                        SendOpenMenuCommand<Leaf>(c2d.GetComponent<Leaf>(), "Leaf");
+                        return;
+                    
+                    case "Branch":
+                        SendOpenMenuCommand<Branch>(c2d.GetComponent<Branch>(), "Branch");
+                        return;
 
-                default:
-                    return;
-            }   
+                    default:
+                        return;
+                }   
+            }
         }
-        // else
-        // {
-        //     _mediator.Publish(new CloseColoringMenuCommand());
-        // }
+    }
+
+    private void MenuStateChanged(MenuStateChangedCommand callback)
+    {
+        _menuOpen = callback.MenuState;
     }
 
     private void SendOpenMenuCommand<T>(T choosedObj, string id) where T : IWithPosition

@@ -7,6 +7,7 @@ public class MenuStateController : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
     [SerializeField] private List<MenuData> _menuDatas;
+    private MenuStateChangedCommand _command = new MenuStateChangedCommand();
 
     private void Awake() 
     {
@@ -37,6 +38,8 @@ public class MenuStateController : MonoBehaviour
         foreach(MenuData menuData in _menuDatas)
             if(menuData.ID == callback.ID)
             {
+                _command.MenuState = true;
+                _mediator.Publish(_command);
                 ChangeMenuState(menuData, true, callback.Object.GetPosition());
             }
     }
@@ -45,7 +48,11 @@ public class MenuStateController : MonoBehaviour
     {
         foreach(MenuData menuData in _menuDatas)
             if(menuData.ID == ID)
+            {
+                _command.MenuState = true;
+                _mediator.Publish(_command);
                 menuData.MenuBody.SetActive(true);
+            } 
     }
 
     private void CloseMenu(CloseMenusCommand callback)
@@ -54,13 +61,19 @@ public class MenuStateController : MonoBehaviour
         {
             if(callback.IDs.Count == 0)
             {
+                _command.MenuState = false;
+                _mediator.Publish(_command);
                 ChangeMenuState(menuData, false, Vector3.zero);
             }
             else
             {
                 foreach(string identifier in callback.IDs)
                     if(menuData.ID == identifier)
+                    {
+                        _command.MenuState = false;
+                        _mediator.Publish(_command);
                         ChangeMenuState(menuData, false, Vector3.zero);
+                    }
             }
         }
     }
