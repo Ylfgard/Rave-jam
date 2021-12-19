@@ -5,11 +5,15 @@ public class CanAffortImage
 {
     [SerializeField]
     private Image _canAffortImage;
+    [SerializeField]
+    private Sprite _canAffort;
+    [SerializeField]
+    private Sprite _cantAffort;
     public void ChangeAffortColor(int money, int price)
     {
         if (money >= price)
-            _canAffortImage.color = Color.green;
+            _canAffortImage.sprite = _canAffort;
         else
-            _canAffortImage.color = Color.red;
+            _canAffortImage.sprite = _cantAffort;
     }
 }

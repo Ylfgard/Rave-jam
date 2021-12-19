@@ -9,8 +9,10 @@ public class PaintCellProvider<T> where T : PaintView
     public List<T> Provide(Transform parent = null)
     {
         List<T> paintViews = new List<T>();
+        Debug.Log(_paints.Count);
         for (int i = 0; i < _paints.Count; i++)
         {
+            
             paintViews.Add(Object.Instantiate(_paintViewPrefab));
             paintViews[i].Initialize(_paints[i]);
             paintViews[i].SetParent(parent);
@@ -20,5 +22,6 @@ public class PaintCellProvider<T> where T : PaintView
     public void SetPaints(List<PaintCell> paints)
     {
         _paints = paints;
+        Debug.Log("i got paints");
     }
 }

@@ -4,9 +4,11 @@ public class PaintMenu<T> : Menu where T : PaintView
 {
     [SerializeField]
     protected Mediator _mediator;
+    [SerializeField]
     protected List<PaintCell> _paints;
     [SerializeField]
     private PaintCellProvider<T> _paintPanelProvider;
+    [SerializeField]
     protected List<T> _paintPanels;
     protected void Awake()
     {

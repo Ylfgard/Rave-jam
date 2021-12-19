@@ -9,12 +9,13 @@ public class StoreItemSwitcher
     [SerializeField]
     private Button _previousItemButton;
     [SerializeField]
-    private NumberView _itemIndexView;
+    private SpriteView _storeItemSpriteView;
     private List<StoreItem> _storeItems;
     protected StoreItem _currentItem;
-    private int _count;
+    private int _storeItemIndex;
     public void OnEnable()
     {
+
         _nextStoreItemButton.onClick.AddListener(MoveToNextItem);
         _previousItemButton.onClick.AddListener(MoveToPreviousItem);
     }
@@ -30,34 +31,38 @@ public class StoreItemSwitcher
     }
     private void MoveToNextItem()
     {
-        if (_count + 1 >= _storeItems.Count)
+        if (_storeItemIndex + 1 >= _storeItems.Count)
         {
-            _count = 0;
-            _currentItem = _storeItems[_count];
+            _storeItemIndex = 0;
+            SetCurrentStoreItem(_storeItemIndex);
         }
         else
         {
-            _count++;
-            _currentItem = _storeItems[_count];
+            _storeItemIndex++;
+            SetCurrentStoreItem(_storeItemIndex);
         }
-        _itemIndexView.SetNumber(_count);
     }
     private void MoveToPreviousItem()
     {
-        if (_count - 1 < 0)
+        if (_storeItemIndex - 1 < 0)
         {
-            _count = _storeItems.Count - 1;
-            _currentItem = _storeItems[_count];
+            _storeItemIndex = _storeItems.Count - 1;
+            SetCurrentStoreItem(_storeItemIndex);
         }
         else
         {
-            _count--;
-            _currentItem = _storeItems[_count];
+            _storeItemIndex--;
+            SetCurrentStoreItem(_storeItemIndex);
         }
-        _itemIndexView.SetNumber(_count);
     }
     private void SetDefaultStoreItem()
     {
         _currentItem = _storeItems[0];
+        _storeItemSpriteView.SetSprite(_currentItem.ItemSprite);
+    }
+    private void SetCurrentStoreItem(int index)
+    {
+        _currentItem = _storeItems[index];
+        _storeItemSpriteView.SetSprite(_currentItem.ItemSprite);
     }
 }

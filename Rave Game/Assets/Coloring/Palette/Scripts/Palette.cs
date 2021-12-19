@@ -9,21 +9,21 @@ public class Palette : MonoBehaviour
     [SerializeField] private Mediator _mediator;
     [SerializeField] private Desaturation _desaturation;
     [SerializeField] private List<PaintCell> _paintCells;
+    [SerializeField] private StoreItemSendCommand _storeItemSendCommand;
     private PaintCellChangedCommand _paintCellChangedCommand = new PaintCellChangedCommand();
     private PaintCellSendCommand _paintCellSendCommand = new PaintCellSendCommand();
-    private StoreItemSendCommand _storeItemSendCommand = new StoreItemSendCommand();
     public List<PaintCell> PaintCells => _paintCells;
     private void Awake()
     {
         foreach (PaintCell paintCell in _paintCells)
             paintCell.SetAnimalDataKeeper(_animalDataKeeper);
-        _mediator.Subscribe<MakePaintPriceNormalCommand>(MakePriceNormal);    
+        _mediator.Subscribe<MakePaintPriceNormalCommand>(MakePriceNormal);
+        SendPaintCells();
+        SendStoreItems();
     }
 
     private void Start()
     {
-        SendPaintCells();
-        SendStoreItems();
         _paintCellChangedCommand.PaintCells = new List<PaintCell>();
         foreach (PaintCell paintCell in _paintCells)
             if (paintCell.Available)

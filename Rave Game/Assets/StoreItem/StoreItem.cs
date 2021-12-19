@@ -4,6 +4,9 @@ using UnityEngine;
 public abstract class StoreItem : IBuyable, ICountable
 {
     [SerializeField]
+    private Sprite _itemSprite;
+    public Sprite ItemSprite => _itemSprite;
+    [SerializeField]
     protected int _price;
     [SerializeField]
     protected int _count;
