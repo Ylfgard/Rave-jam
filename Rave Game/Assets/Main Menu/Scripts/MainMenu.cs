@@ -7,7 +7,9 @@ using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private Mediator _mediator;
     [SerializeField] private GameObject _menuBody;
+    [SerializeField] private GameObject _winWindow;
     [SerializeField] private bool _openOnStart;
     [SerializeField] private List<VolumeSLider> _volumeSliders;
 
@@ -15,6 +17,8 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        _mediator.Subscribe<TreeLevelStagesCompleteCommand>(OpenWinWindow);
+        _winWindow.SetActive(false);
         var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
         Debug.Log(result);
         result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
@@ -47,6 +51,11 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void OpenWinWindow(TreeLevelStagesCompleteCommand callback)
+    {
+        _winWindow.SetActive(true);
     }
 }
 
