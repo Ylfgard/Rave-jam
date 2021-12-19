@@ -630,6 +630,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &581513550 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8917854790739496364, guid: f431505768eda704190b9832b91a462c, type: 3}
+  m_PrefabInstance: {fileID: 8917854790106770201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &743312923
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +937,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc19835bcdc6ed64d820f372b5bb96ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sellPainSound:
+    Guid:
+      Data1: 3346150
+      Data2: 1121572955
+      Data3: 1158521260
+      Data4: 330140777
+    Path: event:/SFX/sell
+  _hintSound:
+    Guid:
+      Data1: -1524475601
+      Data2: 1333841646
+      Data3: 9004935
+      Data4: -1401828412
+    Path: event:/SFX/Buy
   _animalDataKeeper: {fileID: 1110736956}
   _mediator: {fileID: 1487662984}
   _desaturation:
@@ -941,7 +960,7 @@ MonoBehaviour:
   _paintCells:
   - _itemSprite: {fileID: 0}
     _price: 2
-    _count: 4
+    _count: 12342
     _paint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
     _available: 0
   - _itemSprite: {fileID: 0}
@@ -2356,6 +2375,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1584845386}
     m_Modifications:
+    - target: {fileID: 6557190869998859009, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8917854788954459184, guid: f431505768eda704190b9832b91a462c, type: 3}
       propertyPath: _mediator
       value: 
@@ -2372,6 +2395,10 @@ PrefabInstance:
       propertyPath: _canAffortImage._cantAffort
       value: 
       objectReference: {fileID: 21300000, guid: 059041e602b08e748a012054442b4b96, type: 3}
+    - target: {fileID: 8917854789681249229, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: _paintPanelProvider._parent
+      value: 
+      objectReference: {fileID: 581513550}
     - target: {fileID: 8917854789681249229, guid: f431505768eda704190b9832b91a462c, type: 3}
       propertyPath: _storeItemBuyPanel._storeItemSpriteView._spriteView
       value: 
@@ -2408,9 +2435,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8917854790549781721, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: _endDaySound.Path
+      value: event:/SFX/finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917854790549781721, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: _endDaySound.Guid.Data1
+      value: -1662223789
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917854790549781721, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: _endDaySound.Guid.Data2
+      value: 1199609315
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917854790549781721, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: _endDaySound.Guid.Data3
+      value: -1518199627
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917854790549781721, guid: f431505768eda704190b9832b91a462c, type: 3}
+      propertyPath: _endDaySound.Guid.Data4
+      value: -1471029197
+      objectReference: {fileID: 0}
     - target: {fileID: 8917854790739496365, guid: f431505768eda704190b9832b91a462c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8917854790739919842, guid: f431505768eda704190b9832b91a462c, type: 3}
       propertyPath: m_Pivot.x

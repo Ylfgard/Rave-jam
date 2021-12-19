@@ -10,11 +10,11 @@ public abstract class InteractableButton : MonoBehaviour
     {
         _interactButton = GetComponent<Button>();
     }
-    private void OnEnable()
+    protected void OnEnable()
     {
         _interactButton.onClick.AddListener(Interact);
     }
-    private void OnDisable()
+    protected void OnDisable()
     {
         _interactButton.onClick.RemoveListener(Interact);
     }

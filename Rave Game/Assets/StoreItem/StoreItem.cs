@@ -34,7 +34,7 @@ public abstract class StoreItem : IBuyable, ICountable
         else
             throw new InvalidOperationException();
     }
-    public void RemoveCount(int count)
+    public virtual void RemoveCount(int count)
     {
         if (count > 0 && _count >= count)
             _count -= count;
