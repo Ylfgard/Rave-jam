@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1824f68118792bc4fbe19cd843dce26b, type: 3}
   m_Name: Parrot
   m_EditorClassIdentifier: 
-  _bookSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  _bookSprite: {fileID: 21300000, guid: 50308838efb2ec847809d81498c6fc05, type: 3}
   _unblokingPaint: {fileID: 11400000, guid: 47530cd8ecede3641b2ac972e76f9b72, type: 2}
   _paintIncome: {fileID: 11400000, guid: faf72f2558ce6e14cb8d0c92d3c5ece1, type: 2}
   _bringEssence: 0

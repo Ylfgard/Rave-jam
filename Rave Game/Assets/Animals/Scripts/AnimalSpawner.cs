@@ -20,7 +20,7 @@ namespace Animals
         private void SpawnAnimal(AnimalData animalData)
         {
             if(animalData.ExistingAnimals.Count == 0)
-                ShowAnimal();
+                ShowAnimal(animalData);
             Animal animal = Instantiate(animalData.Prefab, Vector3.zero, Quaternion.identity).GetComponent<Animal>();
             animal.Init(_palette, _mediator);
             _finishDayButton.Clicked.AddListener(animal.EndDay);
@@ -73,18 +73,20 @@ namespace Animals
                 _finishDayButton.Clicked.RemoveListener(animalData.ExistingAnimals[0].EndDay);
                 animalData.RemoveAnimal(animalData.ExistingAnimals[0]);
                 if(animalData.ExistingAnimals.Count == 0)
-                    HideAnimal();
+                    HideAnimal(animalData);
             }
         }
 
-        private void ShowAnimal()
+        private void ShowAnimal(AnimalData animalData)
         {
-            Debug.Log("ShowAnimal");
+            if(animalData.AnimalOnScene != null)
+                animalData.AnimalOnScene.SetActive(true);
         }
 
-        private void HideAnimal()
+        private void HideAnimal(AnimalData animalData)
         {
-            Debug.Log("HideAnimal");
+            if(animalData.AnimalOnScene != null)
+                animalData.AnimalOnScene.SetActive(false);
         }
     }
 

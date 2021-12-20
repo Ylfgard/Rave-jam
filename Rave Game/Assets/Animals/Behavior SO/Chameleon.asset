@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1824f68118792bc4fbe19cd843dce26b, type: 3}
   m_Name: Chameleon
   m_EditorClassIdentifier: 
-  _bookSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  _bookSprite: {fileID: 21300000, guid: b9f708cc6822e084696cc482219db247, type: 3}
   _unblokingPaint: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
   _paintIncome: {fileID: 11400000, guid: ce05d876aedd6d749839acbdf7c54f00, type: 2}
   _bringEssence: 0

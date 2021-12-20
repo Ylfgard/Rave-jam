@@ -17,8 +17,11 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        _mediator.Subscribe<TreeLevelStagesCompleteCommand>(OpenWinWindow);
-        _winWindow.SetActive(false);
+        if(_mediator != null)
+        {
+            _mediator.Subscribe<TreeLevelStagesCompleteCommand>(OpenWinWindow);
+            _winWindow.SetActive(false);
+        } 
         var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
         Debug.Log(result);
         result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();

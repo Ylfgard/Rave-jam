@@ -10,6 +10,7 @@ namespace Animals
         private Mediator _mediator;
         private Palette _palette;
         private int _dayPassed;
+        private bool _dontBringIncome;
         private MakePaintPriceNormalCommand command = new MakePaintPriceNormalCommand();
 
         public void Init(Palette palette, Mediator mediator)
@@ -20,6 +21,8 @@ namespace Animals
             _palette.UnblockPaint(_animalBehavior.UnblockingPaint);
             command.Paint = _animalBehavior.UnblockingPaint;
             command.Unblock = true;
+            _dontBringIncome = false;
+            _mediator.Subscribe<TreeLevelStagesCompleteCommand>(StopBringIncome);
             _mediator.Publish(command);
         }
 
@@ -30,19 +33,27 @@ namespace Animals
                 BringIncome();
         }
 
+        private void StopBringIncome(TreeLevelStagesCompleteCommand callback)
+        {
+            _dontBringIncome = true;
+        }
+
         private void BringIncome()
         {
-            if(_animalBehavior.BringEssence == false)
+            if(_dontBringIncome == false)
             {
-                _palette.ChangePaintCount(_animalBehavior.Paint.Name, _animalBehavior.Income);
+                if(_animalBehavior.BringEssence == false)
+                {
+                    _palette.ChangePaintCount(_animalBehavior.Paint.Name, _animalBehavior.Income);
+                }
+                else
+                {
+                    GetEssenceCommand command = new GetEssenceCommand();
+                    command.Count = _animalBehavior.Income;
+                    _mediator.Publish(command);
+                }
+                _dayPassed = 0;
             }
-            else
-            {
-                GetEssenceCommand command = new GetEssenceCommand();
-                command.Count = _animalBehavior.Income;
-                _mediator.Publish(command);
-            }
-            _dayPassed = 0;
         }
         
         public void Despawn()

@@ -35,7 +35,7 @@ public class Palette : MonoBehaviour
     public void UnblockPaint(Paint paint)
     {
         foreach (PaintCell paintCell in _paintCells)
-            if (paintCell.Paint == paint)
+            if (paintCell.Paint == paint && paintCell.Available == false)
             {
                 _paintCellChangedCommand.PaintCells.Add(paintCell);
                 _mediator.Publish(_paintCellChangedCommand);

@@ -16,6 +16,11 @@ namespace Animals
         private void Awake()
         {
             _mediator.Subscribe<AddedAnimalCombinationsCommand>(AnimalAddedInBook);
+            foreach(AnimalData animalData in _animalsData)
+            {
+                if(animalData.AnimalOnScene != null)
+                    animalData.AnimalOnScene.SetActive(false);
+            }    
         }
         public bool UnblockCombination(PaintCell paintCell)
         {
@@ -54,7 +59,7 @@ namespace Animals
         [SerializeField] private AnimalCombination _combination;
         [SerializeField] private GameObject _prefab;
         [SerializeField] private AnimalBehavior _behavior;
-        [SerializeField] private Animator _animator;
+        [SerializeField] private GameObject _animalOnLevel;
         private List<Animal> _existingAnimals = new List<Animal>();
 
         public string Name => _name;
@@ -65,7 +70,7 @@ namespace Animals
         
         public AnimalBehavior Behavior => _behavior;
 
-        public Animator Animator => _animator;
+        public GameObject AnimalOnScene => _animalOnLevel;
 
         public List<Animal> ExistingAnimals => _existingAnimals;
 

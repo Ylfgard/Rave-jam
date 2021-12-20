@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using TMPro;
 
 public class TreeGrower : MonoBehaviour
 {
     [SerializeField] private Mediator _mediator;
+    [SerializeField] private TextMeshProUGUI _essenceCounter;
     [SerializeField] private EventReference _groweSound;
     [SerializeField] private FMODUnity.StudioEventEmitter _emitter;
     [SerializeField] private EventReference _winSound;
@@ -34,6 +36,7 @@ public class TreeGrower : MonoBehaviour
                 }
         _curStageIndex = 0;
         _growed = false;
+        _essenceCounter.text = _essence.Count.ToString() + "/" + _levelStages[_curStageIndex].EssenceNeed.ToString();
     }
 
     private void GetEssence(GetEssenceCommand callback)
@@ -43,6 +46,8 @@ public class TreeGrower : MonoBehaviour
             _essence.AddCount(callback.Count);
             if(_essence.Count >= _levelStages[_curStageIndex].EssenceNeed)
                 ShowNextStage();
+            else
+                _essenceCounter.text = _essence.Count.ToString() + "/" + _levelStages[_curStageIndex].EssenceNeed.ToString();
         }
     }
 
@@ -64,6 +69,7 @@ public class TreeGrower : MonoBehaviour
                 _growedBranches.Add(branch);
                 branch.SetActive(true);
             }
+            _essenceCounter.text = _essence.Count.ToString() + "/" + _levelStages[_curStageIndex].EssenceNeed.ToString();
         }
     }
 }
